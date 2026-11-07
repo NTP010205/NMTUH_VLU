@@ -135,3 +135,7 @@ pwsh -NoProfile -File scripts/render_word.ps1
 ```
 
 `render_word.ps1` dùng Microsoft Word đã cài trên Windows, mở DOCX read-only trong instance ẩn, xuất PDF rồi đóng instance đó. Phải xem từng ảnh `report/qa/final/page-N.png` và sửa lỗi dàn trang trước khi nghiệm thu. PDF/PNG là sản phẩm QA, bị Git-ignore. Có thể theo dõi thí nghiệm bằng `.venv/Scripts/python.exe scripts/show_progress.py`; không khởi động runner thứ hai vào cùng output.
+
+## Nghiệm thu và bàn giao
+
+[Hồ sơ nghiệm thu](docs/review/NGHIEM_THU.md) ghi phạm vi kiểm tra thực tế, kết quả clone, các trial gián đoạn và giới hạn còn lại. [Danh sách file thay đổi](docs/review/CHANGED_FILES.md).

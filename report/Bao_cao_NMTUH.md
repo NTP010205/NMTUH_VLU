@@ -182,7 +182,7 @@ max_features: AP từ 0.443294 đến 0.444306; size từ 0.693 đến 0.762 MB.
 
 Những thay đổi quan sát được mô tả độ nhạy quanh một cấu hình cụ thể. Không coi chúng là feature importance, mức quan trọng toàn cục của siêu tham số hoặc quan hệ nhân quả. Nghiệm trung tâm xuất hiện trong bốn lát cắt nhưng được tái sử dụng từ cùng một đánh giá CV; không đếm thành bốn quan sát độc lập.
 
-Kể cả nếu một lân cận có chỉ số thuận lợi, nghiên cứu này vẫn giữ lựa chọn chính đã khóa. Muốn đổi nghiệm theo sensitivity cần một protocol mới, ngân sách mới và chiến lược đánh giá tách khỏi kết quả đã dùng để lựa chọn.
+Hậu kiểm có 1 lân cận trội hơn nghiệm trung tâm trên hai mục tiêu; ví dụ max_features=0.746841 đạt AP 0.443564 và size 0.693 MB. Nghiên cứu giữ lựa chọn chính đã khóa. Muốn đổi nghiệm theo sensitivity cần một protocol mới và chiến lược đánh giá tách khỏi kết quả đã dùng để lựa chọn.
 
 # 6 Thảo luận
 

@@ -223,12 +223,21 @@ def build_pages(data):
     for name in PARAMS:
         values = [r for r in data['sensitivity'] if r['variable'] == name]
         sensitivity_notes.append(f"{name}: AP từ {min(float(r[AP]) for r in values):.6f} đến {max(float(r[AP]) for r in values):.6f}; size từ {min(float(r[SIZE]) for r in values):.3f} đến {max(float(r[SIZE]) for r in values):.3f} MB")
+    improvements = [r for r in data['sensitivity'] if r['config_hash'] != row['config_hash']
+                    and float(r[AP]) >= row[AP] and float(r[SIZE]) <= row[SIZE]
+                    and (float(r[AP]) > row[AP] or float(r[SIZE]) < row[SIZE])]
+    sensitivity_decision = 'Nghiên cứu giữ lựa chọn chính đã khóa. Muốn đổi nghiệm theo sensitivity cần một protocol mới và chiến lược đánh giá tách khỏi kết quả đã dùng để lựa chọn.'
+    if improvements:
+        neighbor = improvements[0]
+        sensitivity_decision = (f"Hậu kiểm có {len(improvements)} lân cận trội hơn nghiệm trung tâm trên hai mục tiêu; "
+                                f"ví dụ {neighbor['variable']}={fmt(neighbor['value'])} đạt AP {fmt(neighbor[AP])} "
+                                f"và size {fmt(neighbor[SIZE],3)} MB. " + sensitivity_decision)
     page('5 Phân tích độ nhạy cục bộ',
          f('sensitivity.png', 'Hình 4 Thay từng biến quanh nghiệm chọn. Thanh sai số là sample std giữa ba folds; đường dọc đánh dấu giá trị selected.'),
          p('Sensitivity được thực hiện sau khi khóa selected_candidate.json. Mỗi lần chỉ thay một biến, giữ ba biến còn lại, cùng train và folds. Mỗi biến có tối đa ba giá trị hợp lệ và không trùng; nếu nghiệm ở biên miền thì số lân cận có thể ít hơn. Kết quả được lưu riêng trong results/sensitivity.'),
          *[p(note + '.') for note in sensitivity_notes],
          p('Những thay đổi quan sát được mô tả độ nhạy quanh một cấu hình cụ thể. Không coi chúng là feature importance, mức quan trọng toàn cục của siêu tham số hoặc quan hệ nhân quả. Nghiệm trung tâm xuất hiện trong bốn lát cắt nhưng được tái sử dụng từ cùng một đánh giá CV; không đếm thành bốn quan sát độc lập.'),
-         p('Kể cả nếu một lân cận có chỉ số thuận lợi, nghiên cứu này vẫn giữ lựa chọn chính đã khóa. Muốn đổi nghiệm theo sensitivity cần một protocol mới, ngân sách mới và chiến lược đánh giá tách khỏi kết quả đã dùng để lựa chọn.'))
+         p(sensitivity_decision))
     page('6 Thảo luận',
          p(f'Nghiệm cuối có AP {fmt(row[AP])}, so với {fmt(base[AP])} của baseline, và có dung lượng sau refit {fmt(selected["full_train"]["full_train_size_mb"],3)} MB. Hai mục tiêu làm rõ lý do chấp nhận một mức mất AP nhỏ so với best để ưu tiên dung lượng. Tolerance 0,005 là lựa chọn thiết kế; thực nghiệm không chứng minh đây là tolerance tốt nhất cho mọi ứng dụng.'),
          p('Holdout đã từng được đánh giá ở giai đoạn baseline v1. V2 không dùng holdout trong search, chọn sampler, chọn seed, chọn tolerance hoặc sensitivity; báo cáo này không bổ sung đánh giá holdout cuối. Không mô tả holdout là hoàn toàn chưa từng xem và không hứa có external test. CV của nghiệm được chọn có thể lạc quan do được dùng lặp lại trong tìm kiếm.'),

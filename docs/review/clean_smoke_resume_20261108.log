@@ -1,0 +1,4 @@
+[I 2026-11-08 06:13:13,469] Using an existing study with name 'ap_model_size_4hp_v2_smoke_seed42_random' instead of creating a new one.
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU_clean_check\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-08 06:13:13,577] Using an existing study with name 'ap_model_size_4hp_v2_smoke_seed42_tpe' instead of creating a new one.

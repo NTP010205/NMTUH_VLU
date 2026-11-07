@@ -1,0 +1,53 @@
+{
+  "checked_utc": "2026-11-07T23:13:13.752576+00:00",
+  "commit": "58f46d6d1544177051eeed98fd0d2a5207b53e83",
+  "tests": {
+    "passed": 60,
+    "skipped": 2,
+    "warnings": 26,
+    "seconds": 20.96,
+    "skip_reason": "Historical SQLite databases absent"
+  },
+  "compileall": "PASS",
+  "analysis_without_raw_csv_full_db_or_full_models": "PASS",
+  "attempted": 400,
+  "complete": 398,
+  "failed": 2,
+  "sqlite_statuses": [
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)",
+    "not checked (database absent)"
+  ],
+  "table_hash_matches": {
+    "budget_summary.csv": true,
+    "convergence.csv": true,
+    "paired_differences.csv": true,
+    "pareto.csv": true,
+    "ranked_candidates.csv": true,
+    "run_summary.csv": true,
+    "sampler_summary.csv": true,
+    "startup_duplicates.csv": true
+  },
+  "figure_hash_matches": {
+    "convergence.png": true,
+    "pareto.png": true,
+    "seed_distribution.png": true
+  },
+  "smoke": {
+    "complete": 4,
+    "failed": 0,
+    "fold_records": 12,
+    "baseline_fold_records": 3,
+    "matches_original_smoke_metrics_and_parameters": true,
+    "resume_adds_trials": false
+  },
+  "dataset_sha256": "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d",
+  "note": "Full 400-trial run executed in primary workspace; clean clone independently ran smoke and reproduced all analysis tables, not a second full run."
+}

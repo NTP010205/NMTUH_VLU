@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-11-07T23:08:29.672865+00:00",
+  "checked_utc": "2026-11-07T23:15:10.745285+00:00",
   "renderer": "Microsoft Word native PDF export; PyMuPDF rasterization at 150 dpi",
   "canonical_renderer": "Unavailable: soffice.exe missing; see document_renderer_probe.log",
   "content_pages": 10,
@@ -7,8 +7,8 @@
   "documents": [
     {
       "file": "report/Bao_cao_NMTUH.docx",
-      "sha256": "1a27ebdc812414653aa7de22f5b1b7fdfa5d2c80c4df9452045467b140b5d848",
-      "pdf_sha256": "281c7e0390c13160b6f054df1e598a713f89d04a8ed6956a33296b188024e7bd",
+      "sha256": "56cb223b66d84a242c0ab8868b6e24d417d9fd940cbce7fee9cbe0fb88be6667",
+      "pdf_sha256": "1dd76e5f26a330a9c09b46602205068b51e8230c5690db8e730fb76b6c08a868",
       "pages": 12,
       "pages_visually_inspected": [
         1,
@@ -33,7 +33,7 @@
         "page-6.png": "27f18f5784caf265f2fd66e56fab16df6c5f6af2499d4b4bbcef83f16c51fb7b",
         "page-7.png": "0482d5c587fe3a200c088596c528ab4521783fda5b69d8b44bdab73f53db4450",
         "page-8.png": "97b5a15da4f9ae4d44e013328585198b0353ddcd2688fc4371196c87a2856003",
-        "page-9.png": "5595dff3354bb4ce9a58b69ff2c30acfd438deb39088636f2a70fbb32ac24208",
+        "page-9.png": "232a6259651058f3d65146d986484ff7327ff41690d5e5ba85d608a5f5897653",
         "page-10.png": "6d57b81a37ce74083a13e67759241bb69e51375ae5e2196600feefd75992490f",
         "page-11.png": "f4ae2927fc128b162f5221b2ad94a4b14028f44da1eab0990e328136a795ba6d",
         "page-12.png": "7148d9ffe5a0635d96dd7f91f5997b5ff50ce0571c450d9edc04bce758c1f1bd"
@@ -42,8 +42,8 @@
     },
     {
       "file": "report/Tom_tat_bao_ve.docx",
-      "sha256": "e7b941aabc699d23abcb3474b4b26bf946cc6749eb1edec7ea8e27a5480fd5fc",
-      "pdf_sha256": "cb4d724c1c711a2b1a4db7fd5e22382b26a20f491d3983c84d0bd38cca80aa19",
+      "sha256": "0f758fa0d6d21aabd5077db083f8a078fb40f125c43e645063410d15757b0e8a",
+      "pdf_sha256": "1c7d4c62f6d33a3d4f5ff9d42138c89c3e651efbff76239648bc6920bff1631d",
       "pages": 1,
       "pages_visually_inspected": [
         1
@@ -53,5 +53,6 @@
       },
       "result": "PASS: no clipped content, broken table, missing glyph or overlapping figure observed"
     }
-  ]
+  ],
+  "last_revision": "Page 9 updated with data-derived sensitivity dominance; re-inspected. Other 12 PNGs byte-identical to inspected version."
 }

@@ -527,7 +527,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Kể cả nếu một lân cận có chỉ số thuận lợi, nghiên cứu này vẫn giữ lựa chọn chính đã khóa. Muốn đổi nghiệm theo sensitivity cần một protocol mới, ngân sách mới và chiến lược đánh giá tách khỏi kết quả đã dùng để lựa chọn."
+        "text": "Hậu kiểm có 1 lân cận trội hơn nghiệm trung tâm trên hai mục tiêu; ví dụ max_features=0.746841 đạt AP 0.443564 và size 0.693 MB. Nghiên cứu giữ lựa chọn chính đã khóa. Muốn đổi nghiệm theo sensitivity cần một protocol mới và chiến lược đánh giá tách khỏi kết quả đã dùng để lựa chọn."
       }
     ]
   },

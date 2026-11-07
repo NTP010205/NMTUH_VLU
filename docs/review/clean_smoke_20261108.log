@@ -1,0 +1,8 @@
+[I 2026-11-08 06:07:56,726] A new study created in RDB with name: ap_model_size_4hp_v2_smoke_seed42_random
+ap_model_size_4hp_v2_smoke_seed42_random: 1/2
+ap_model_size_4hp_v2_smoke_seed42_random: 2/2
+D:\Th\u1ef1c h�nh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU_clean_check\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-08 06:09:25,196] A new study created in RDB with name: ap_model_size_4hp_v2_smoke_seed42_tpe
+ap_model_size_4hp_v2_smoke_seed42_tpe: 1/2
+ap_model_size_4hp_v2_smoke_seed42_tpe: 2/2
