@@ -29,6 +29,7 @@ OFFICIAL_RELATIVE = Path("results/hpo/ap_model_size_v1/full_run_01")
 BASELINE_RELATIVE = Path("results/baseline")
 ANALYSIS_RELATIVE = Path("results/analysis/week4")
 FIGURES_RELATIVE = Path("figures/week4")
+EDA_FIGURES_RELATIVE = FIGURES_RELATIVE / "eda"
 DATASET_RELATIVE = Path("data/raw/bank-full.csv")
 SPLIT_RELATIVE = BASELINE_RELATIVE / "split_indices.npz"
 
@@ -294,6 +295,257 @@ def frozen_train_eda_tables(
         ),
     }
     return summary, numeric, categorical
+
+
+def _vi_int(value: int) -> str:
+    return f"{int(value):,}".replace(",", ".")
+
+
+def _vi_float(value: float, digits: int = 2) -> str:
+    return f"{float(value):.{digits}f}".replace(".", ",")
+
+
+def generate_frozen_train_eda_figures(
+    frame: pd.DataFrame, output_dir: Path
+) -> tuple[dict[str, Any], list[dict[str, str]]]:
+    """Create report-ready EDA plots exclusively from frozen training rows."""
+    if len(frame) != 36_168:
+        raise ValueError(f"Expected 36,168 frozen training rows; got {len(frame):,}")
+    if LEAKAGE_COLUMN in frame.columns:
+        raise AssertionError("duration must not be materialized for EDA figures")
+    target_counts = frame[TARGET_COLUMN].value_counts()
+    expected_counts = {"no": 31_937, "yes": 4_231}
+    observed_counts = {label: int(target_counts.get(label, 0)) for label in ("no", "yes")}
+    if observed_counts != expected_counts:
+        raise ValueError(
+            f"Frozen-train target counts differ from the accepted EDA: {observed_counts}"
+        )
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    plt.rcParams.update(
+        {
+            "font.family": "DejaVu Sans",
+            "figure.dpi": 120,
+            "savefig.dpi": 320,
+            "font.size": 10,
+            "axes.titlesize": 13,
+            "axes.labelsize": 10,
+            "legend.fontsize": 9,
+        }
+    )
+
+    figure_records: dict[str, Any] = {}
+    captions: list[dict[str, str]] = []
+
+    def save(figure: plt.Figure, filename: str, source_columns: list[str]) -> Path:
+        path = output_dir / filename
+        figure.tight_layout()
+        figure.savefig(path, dpi=320, bbox_inches="tight")
+        plt.close(figure)
+        figure_records[filename] = {
+            "path": str(path.relative_to(PROJECT_ROOT)),
+            "sha256": sha256_file(path),
+            "bytes": path.stat().st_size,
+            "dpi": 320,
+            "source_columns": source_columns,
+            "source_scope": "frozen_training_rows_only",
+        }
+        return path
+
+    labels = ["Không (no)", "Có (yes)"]
+    counts = np.asarray([observed_counts["no"], observed_counts["yes"]], dtype=int)
+    percentages = counts / counts.sum() * 100.0
+    figure, axis = plt.subplots(figsize=(7.2, 4.8))
+    bars = axis.bar(labels, counts, color=["#4472C4", "#ED7D31"], width=0.62)
+    axis.set_title("Phân bố biến mục tiêu trên frozen training set")
+    axis.set_xlabel("Nhãn đăng ký tiền gửi có kỳ hạn")
+    axis.set_ylabel("Số mẫu")
+    axis.grid(axis="y", alpha=0.25)
+    padding = max(counts) * 0.025
+    for bar, count, percentage in zip(bars, counts, percentages):
+        axis.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height() + padding,
+            f"{_vi_int(int(count))}\n({_vi_float(float(percentage), 2)}%)",
+            ha="center",
+            va="bottom",
+            fontweight="bold",
+        )
+    axis.set_ylim(0, max(counts) * 1.14)
+    save(figure, "01_target_distribution_train.png", [TARGET_COLUMN])
+    imbalance_ratio = observed_counts["no"] / observed_counts["yes"]
+    captions.append(
+        {
+            "title": "Hình EDA-1. Phân bố biến mục tiêu trên frozen training set",
+            "file": "01_target_distribution_train.png",
+            "caption": (
+                f"Phân bố nhãn trên {_vi_int(len(frame))} mẫu train cố định: "
+                f"`no` = {_vi_int(observed_counts['no'])} ({_vi_float(percentages[0], 2)}%) "
+                f"và `yes` = {_vi_int(observed_counts['yes'])} "
+                f"({_vi_float(percentages[1], 2)}%)."
+            ),
+            "comment": (
+                "Tập train mất cân bằng, với số mẫu `no` xấp xỉ "
+                f"{_vi_float(imbalance_ratio, 2)} lần số mẫu `yes`. Vì vậy Average "
+                "Precision phù hợp hơn accuracy đơn thuần cho đánh giá xếp hạng lớp dương."
+            ),
+        }
+    )
+
+    age = frame["age"].astype(float)
+    age_mean = float(age.mean())
+    age_median = float(age.median())
+    age_q1, age_q3 = (float(value) for value in age.quantile([0.25, 0.75]))
+    age_bins = np.histogram_bin_edges(age, bins="fd")
+    figure, axis = plt.subplots(figsize=(7.2, 4.8))
+    axis.hist(age, bins=age_bins, color="#4472C4", alpha=0.82, edgecolor="white")
+    axis.axvline(age_mean, color="#C00000", linestyle="--", linewidth=1.8, label=f"Trung bình: {_vi_float(age_mean, 2)}")
+    axis.axvline(age_median, color="#2E8B57", linestyle=":", linewidth=2.0, label=f"Trung vị: {_vi_float(age_median, 0)}")
+    axis.set_title("Phân bố tuổi trên frozen training set")
+    axis.set_xlabel("Tuổi")
+    axis.set_ylabel("Số mẫu")
+    axis.grid(axis="y", alpha=0.25)
+    axis.legend()
+    save(figure, "02_age_distribution_train.png", ["age"])
+    captions.append(
+        {
+            "title": "Hình EDA-2. Phân bố tuổi trên frozen training set",
+            "file": "02_age_distribution_train.png",
+            "caption": (
+                f"Phân bố tuổi của {_vi_int(len(frame))} mẫu train; tuổi trung bình "
+                f"{_vi_float(age_mean, 2)}, trung vị {_vi_float(age_median, 0)}, "
+                f"khoảng tứ phân vị {_vi_float(age_q1, 0)}–{_vi_float(age_q3, 0)} tuổi."
+            ),
+            "comment": (
+                "Phần lớn quan sát tập trung ở nhóm tuổi lao động trung niên; đuôi phải "
+                "thể hiện một số khách hàng lớn tuổi. Đây là mô tả train-only, không phải "
+                "bằng chứng về quan hệ nhân quả hoặc khả năng tổng quát ngoài dữ liệu."
+            ),
+        }
+    )
+
+    balance = frame["balance"].astype(float)
+    balance_mean = float(balance.mean())
+    balance_median = float(balance.median())
+    balance_q1, balance_q3 = (float(value) for value in balance.quantile([0.25, 0.75]))
+    balance_p01, balance_p99 = (float(value) for value in balance.quantile([0.01, 0.99]))
+    central_balance = balance.loc[balance.between(balance_p01, balance_p99, inclusive="both")]
+    figure, axis = plt.subplots(figsize=(8.0, 5.2))
+    axis.hist(balance, bins=100, color="#70AD47", alpha=0.78, edgecolor="white")
+    axis.set_yscale("log")
+    axis.axvline(0, color="0.25", linewidth=1.0)
+    axis.axvline(balance_median, color="#C00000", linestyle="--", linewidth=1.7, label=f"Trung vị: {_vi_float(balance_median, 0)}")
+    axis.set_title("Phân bố số dư tài khoản trên frozen training set")
+    axis.set_xlabel("Số dư (balance)")
+    axis.set_ylabel("Số mẫu — thang log")
+    axis.grid(axis="y", alpha=0.25)
+    axis.legend(loc="upper right")
+    inset = axis.inset_axes([0.53, 0.43, 0.43, 0.43])
+    inset.hist(central_balance, bins=60, color="#70AD47", alpha=0.82, edgecolor="white")
+    inset.axvline(0, color="0.25", linewidth=0.8)
+    inset.set_title("Vùng P1–P99", fontsize=9)
+    inset.set_xlabel("Số dư", fontsize=8)
+    inset.set_ylabel("Số mẫu", fontsize=8)
+    inset.tick_params(labelsize=7)
+    save(figure, "03_balance_distribution_train.png", ["balance"])
+    captions.append(
+        {
+            "title": "Hình EDA-3. Phân bố số dư tài khoản trên frozen training set",
+            "file": "03_balance_distribution_train.png",
+            "caption": (
+                f"Phân bố `balance` của {_vi_int(len(frame))} mẫu train: trung bình "
+                f"{_vi_float(balance_mean, 2)}, trung vị {_vi_float(balance_median, 0)}, "
+                f"khoảng tứ phân vị {_vi_float(balance_q1, 0)}–{_vi_float(balance_q3, 0)}. "
+                f"Biểu đồ chính giữ toàn bộ dữ liệu và dùng trục tần số log; ô nhỏ phóng "
+                f"đại vùng P1–P99 ({_vi_float(balance_p01, 0)} đến "
+                f"{_vi_float(balance_p99, 0)})."
+            ),
+            "comment": (
+                "Số dư lệch phải mạnh và có cả giá trị âm. Không quan sát nào bị xóa khỏi "
+                "biểu đồ chính; vùng P1–P99 chỉ là cửa sổ phóng đại để nhìn rõ phần mật độ cao."
+            ),
+        }
+    )
+    statistics = {
+        "target_counts": observed_counts,
+        "target_percentages": {
+            "no": float(percentages[0]), "yes": float(percentages[1])
+        },
+        "age": {
+            "min": float(age.min()), "q1": age_q1, "median": age_median,
+            "mean": age_mean, "q3": age_q3, "max": float(age.max()),
+        },
+        "balance": {
+            "min": float(balance.min()), "p01": balance_p01, "q1": balance_q1,
+            "median": balance_median, "mean": balance_mean, "q3": balance_q3,
+            "p99": balance_p99, "max": float(balance.max()),
+            "negative_count": int(balance.lt(0).sum()),
+            "zero_count": int(balance.eq(0).sum()),
+            "skewness": float(balance.skew()),
+        },
+    }
+    return {"figures": figure_records, "statistics": statistics}, captions
+
+
+def build_week4_eda_outputs(root: Path = PROJECT_ROOT) -> dict[str, Any]:
+    """Validate fingerprints, build three EDA PNGs, captions and a manifest."""
+    root = root.resolve()
+    manifest = read_json(root / OFFICIAL_RELATIVE / "run_manifest.json")
+    dataset_path = root / DATASET_RELATIVE
+    split_path = root / SPLIT_RELATIVE
+    dataset_sha = sha256_file(dataset_path)
+    split_sha = sha256_file(split_path)
+    if dataset_sha != manifest["dataset_sha256"]:
+        raise ValueError("Dataset fingerprint differs from the locked full run")
+    if split_sha != manifest["split_artifact_sha256"]:
+        raise ValueError("Split fingerprint differs from the locked full run")
+    with np.load(split_path, allow_pickle=False) as arrays:
+        train_indices = np.asarray(arrays["train_indices"], dtype=np.int64)
+    train_indices_sha = hashlib.sha256(train_indices.tobytes()).hexdigest()
+    if train_indices_sha != manifest["train_indices_sha256"]:
+        raise ValueError("Frozen train-index fingerprint differs from the locked full run")
+    frame = load_frozen_training_frame(root)
+    generated, captions = generate_frozen_train_eda_figures(
+        frame, root / EDA_FIGURES_RELATIVE
+    )
+    result = {
+        "status": "PASS",
+        "scope": "frozen_training_rows_only",
+        "training_samples": int(len(frame)),
+        "dataset_sha256": dataset_sha,
+        "split_artifact_sha256": split_sha,
+        "train_indices_sha256": train_indices_sha,
+        "duration_materialized": LEAKAGE_COLUMN in frame.columns,
+        "holdout_materialized": False,
+        "training_performed": False,
+        "hpo_performed": False,
+        **generated,
+        "captions": captions,
+    }
+    analysis_dir = root / ANALYSIS_RELATIVE
+    analysis_dir.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "# Caption và nhận xét biểu đồ EDA train-only", "",
+        "Nguồn: 36.168 frozen training rows; không materialize holdout; `duration` bị loại khi đọc.", "",
+    ]
+    for item in captions:
+        lines.extend(
+            [
+                f"## {item['title']}", "",
+                f"File: `{EDA_FIGURES_RELATIVE.as_posix()}/{item['file']}`", "",
+                f"**Caption:** {item['caption']}", "",
+                f"**Nhận xét:** {item['comment']}", "",
+            ]
+        )
+    caption_path = root / "docs/week4_eda_figures.md"
+    caption_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    result["caption_document"] = str(caption_path.relative_to(root))
+    result["generator"] = {
+        "script_sha256": sha256_file(root / "scripts/build_week4_eda_figures.py"),
+        "analysis_module_sha256": sha256_file(Path(__file__)),
+    }
+    write_json(result, analysis_dir / "eda_figure_manifest.json")
+    return result
 
 
 def dominance_table(sources: Week4Sources) -> pd.DataFrame:

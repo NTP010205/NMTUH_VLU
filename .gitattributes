@@ -1,0 +1,3 @@
+# Fingerprints and historical evidence are byte-sensitive across checkouts.
+# Keep original line endings; do not normalize research logs or source bytes.
+* -text

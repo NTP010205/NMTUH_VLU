@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "scope": "frozen_training_rows_only",
+  "training_samples": 36168,
+  "dataset_sha256": "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d",
+  "split_artifact_sha256": "583acb9dbb4ee92852b1d0a9b584cffb2f7b1fc6409dfdb495a46df4cb3d7d1a",
+  "train_indices_sha256": "b078ac348228f8e49c30af463dc1198fb5e8e11d6379e5d842caf580fc728469",
+  "duration_materialized": false,
+  "holdout_materialized": false,
+  "training_performed": false,
+  "hpo_performed": false,
+  "figures": {
+    "01_target_distribution_train.png": {
+      "path": "figures\\week4\\eda\\01_target_distribution_train.png",
+      "sha256": "c7163c0853bafdcdc00d52ed0d9db70f1c14cd1a7011f2be8408ea07045463e0",
+      "bytes": 109261,
+      "dpi": 320,
+      "source_columns": [
+        "y"
+      ],
+      "source_scope": "frozen_training_rows_only"
+    },
+    "02_age_distribution_train.png": {
+      "path": "figures\\week4\\eda\\02_age_distribution_train.png",
+      "sha256": "f0430678fe8516e6d68c659fb990217fa33c33b02e896aafbd78335457a0aeb5",
+      "bytes": 97891,
+      "dpi": 320,
+      "source_columns": [
+        "age"
+      ],
+      "source_scope": "frozen_training_rows_only"
+    },
+    "03_balance_distribution_train.png": {
+      "path": "figures\\week4\\eda\\03_balance_distribution_train.png",
+      "sha256": "3b37a6b5a1813668c8bbbe2f7355ae21b5c4cd371f632cb289484456ba276f47",
+      "bytes": 129828,
+      "dpi": 320,
+      "source_columns": [
+        "balance"
+      ],
+      "source_scope": "frozen_training_rows_only"
+    }
+  },
+  "statistics": {
+    "target_counts": {
+      "no": 31937,
+      "yes": 4231
+    },
+    "target_percentages": {
+      "no": 88.30181375801813,
+      "yes": 11.698186241981864
+    },
+    "age": {
+      "min": 18.0,
+      "q1": 33.0,
+      "median": 39.0,
+      "mean": 40.892999336429995,
+      "q3": 48.0,
+      "max": 95.0
+    },
+    "balance": {
+      "min": -8019.0,
+      "p01": -626.3299999999999,
+      "q1": 74.0,
+      "median": 451.0,
+      "mean": 1365.4934195974342,
+      "q3": 1430.25,
+      "p99": 13161.320000000007,
+      "max": 102127.0,
+      "negative_count": 3001,
+      "zero_count": 2809,
+      "skewness": 8.340203682377846
+    }
+  },
+  "captions": [
+    {
+      "title": "Hình EDA-1. Phân bố biến mục tiêu trên frozen training set",
+      "file": "01_target_distribution_train.png",
+      "caption": "Phân bố nhãn trên 36.168 mẫu train cố định: `no` = 31.937 (88,30%) và `yes` = 4.231 (11,70%).",
+      "comment": "Tập train mất cân bằng, với số mẫu `no` xấp xỉ 7,55 lần số mẫu `yes`. Vì vậy Average Precision phù hợp hơn accuracy đơn thuần cho đánh giá xếp hạng lớp dương."
+    },
+    {
+      "title": "Hình EDA-2. Phân bố tuổi trên frozen training set",
+      "file": "02_age_distribution_train.png",
+      "caption": "Phân bố tuổi của 36.168 mẫu train; tuổi trung bình 40,89, trung vị 39, khoảng tứ phân vị 33–48 tuổi.",
+      "comment": "Phần lớn quan sát tập trung ở nhóm tuổi lao động trung niên; đuôi phải thể hiện một số khách hàng lớn tuổi. Đây là mô tả train-only, không phải bằng chứng về quan hệ nhân quả hoặc khả năng tổng quát ngoài dữ liệu."
+    },
+    {
+      "title": "Hình EDA-3. Phân bố số dư tài khoản trên frozen training set",
+      "file": "03_balance_distribution_train.png",
+      "caption": "Phân bố `balance` của 36.168 mẫu train: trung bình 1365,49, trung vị 451, khoảng tứ phân vị 74–1430. Biểu đồ chính giữ toàn bộ dữ liệu và dùng trục tần số log; ô nhỏ phóng đại vùng P1–P99 (-626 đến 13161).",
+      "comment": "Số dư lệch phải mạnh và có cả giá trị âm. Không quan sát nào bị xóa khỏi biểu đồ chính; vùng P1–P99 chỉ là cửa sổ phóng đại để nhìn rõ phần mật độ cao."
+    }
+  ],
+  "caption_document": "docs\\week4_eda_figures.md",
+  "generator": {
+    "script_sha256": "ffb906daa8edb9fadf06dc9bd059054966bf0653753e40d530d7612961cf633a",
+    "analysis_module_sha256": "bfc55cdda36147bac725c0e9f5213fb43171a42bde350e0d985686b6664f4137"
+  }
+}

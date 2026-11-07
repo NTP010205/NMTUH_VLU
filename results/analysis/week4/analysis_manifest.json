@@ -15,14 +15,14 @@
     "data\\raw\\bank-full.csv": "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d"
   },
   "script_sha256": "b1a285f84484f124b942e5ec6a2121dd42c8483a21b14d5e90b9da3ce13ef328",
-  "analysis_module_sha256": "a0b2f95240ab4d65206458611ce3939d6b731695d9ce3dcfe87e1cb57f84fb3f",
+  "analysis_module_sha256": "bfc55cdda36147bac725c0e9f5213fb43171a42bde350e0d985686b6664f4137",
   "figures": {
     "01_best_so_far_cv_ap": {
       "png": "figures\\week4\\01_best_so_far_cv_ap.png",
       "png_sha256": "8371a20b66fc17730509ea777ae871416ee15805682bf8c2a844745c1555ee43",
       "png_bytes": 89952,
       "pdf": "figures\\week4\\01_best_so_far_cv_ap.pdf",
-      "pdf_sha256": "490e52f4b10417b552d5fda9b4b17c7943ba84bff9959ec494e8a3ed4c99c31a",
+      "pdf_sha256": "98b86d99399d392e15c45a8ec15df034c18804cad99f880e555b90c2d22c7ed6",
       "pdf_bytes": 14503
     },
     "02_ap_vs_model_size": {
@@ -30,7 +30,7 @@
       "png_sha256": "d6a315b272196c128b039af4f6f52d9a31f67cc0e46f953ffb9b8419bf4c640e",
       "png_bytes": 184979,
       "pdf": "figures\\week4\\02_ap_vs_model_size.pdf",
-      "pdf_sha256": "087993fd0177d7859a9527f44cf1783828766666f89ca7aaaa4f98917533a8fb",
+      "pdf_sha256": "6df5c06c32a2033a0e7482ef8f00454a415fb93f0f63c655315fe65c7a830641",
       "pdf_bytes": 17924
     },
     "03_pareto_selected": {
@@ -38,7 +38,7 @@
       "png_sha256": "09d022ef2ca7753d6fc112e8694effed5c91ca0f0390bd58c1c2fc6fb11addc1",
       "png_bytes": 166240,
       "pdf": "figures\\week4\\03_pareto_selected.pdf",
-      "pdf_sha256": "dd54a2dd0ea10480d9d280b754a41f747716b923925f5ddd959d45c6320d2c5b",
+      "pdf_sha256": "501d80e21c82469cee3574f1cefe2b3fa9bf5b7ea8ddb18235327b9342ea6081",
       "pdf_bytes": 19125
     },
     "04_model_size_distribution": {
@@ -46,7 +46,7 @@
       "png_sha256": "39a01b526308fc6f0e63497c7d40d6fb4d50d3b7b8812eea79f3bebae6b91ad4",
       "png_bytes": 66822,
       "pdf": "figures\\week4\\04_model_size_distribution.pdf",
-      "pdf_sha256": "a3e31adbe251b6ef4e88b1b3aa52ab9d815ab807ad49a7184bf1fcdfd3fea07c",
+      "pdf_sha256": "483bc7de8862524724aa3c8a0d0f5064fbf017783f7d51112744d94afb768074",
       "pdf_bytes": 14304
     },
     "05_cumulative_search_time": {
@@ -54,7 +54,7 @@
       "png_sha256": "c40d51ebf69796c1ba71587f4d2e458d132440be56fe5ade8209e055fb03133f",
       "png_bytes": 139205,
       "pdf": "figures\\week4\\05_cumulative_search_time.pdf",
-      "pdf_sha256": "b96b0875bf169747de041f7bb793ed3e3a85cb36285a2d9e6a15757008bf8f9d",
+      "pdf_sha256": "60ce5a83a75e833832e677efed814d262fb9d96a3da22a4dcd7fda18611b4beb",
       "pdf_bytes": 14061
     },
     "06_key_models_comparison": {
@@ -62,7 +62,7 @@
       "png_sha256": "85633ec865498106e5e9855ae7ed00257f3081051765aac7b73c9372fc2f47db",
       "png_bytes": 198809,
       "pdf": "figures\\week4\\06_key_models_comparison.pdf",
-      "pdf_sha256": "08fb6683d92b6b22ecf50148de92c02633d3b80d266bc6e60876e41c9e7b88f0",
+      "pdf_sha256": "0eca7fbc2e9de253090c74b2d67e1e417c5258d9de145db9d93fba7ebdcd2043",
       "pdf_bytes": 18463
     },
     "07_ap_loss_vs_size_reduction": {
@@ -70,7 +70,7 @@
       "png_sha256": "759d0f81b99fcc24212c9e0b5c5aeb72e8c20171bc8b1808698e18d7fd62e472",
       "png_bytes": 144766,
       "pdf": "figures\\week4\\07_ap_loss_vs_size_reduction.pdf",
-      "pdf_sha256": "7340b918ba6bc9114eaa7d267a28208424005ba186817952ea5794c483071721",
+      "pdf_sha256": "e2e814aec389b0a53fbce5bee775687895f9250d171de106388cd29a4a12002e",
       "pdf_bytes": 16398
     }
   },

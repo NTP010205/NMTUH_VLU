@@ -1,0 +1,10 @@
+{
+  "cpu": {
+    "Name": "Intel(R) Core(TM) i7-14650HX",
+    "NumberOfCores": 16,
+    "NumberOfLogicalProcessors": 24
+  },
+  "memory": {
+    "TotalPhysicalMemory": 34053414912
+  }
+}

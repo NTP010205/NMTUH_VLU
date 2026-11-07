@@ -89,13 +89,69 @@ selected configuration.
                 code(BOOTSTRAP),
                 code(
                     """
-from src.week4_analysis import load_frozen_training_frame, frozen_train_eda_tables
+from src.week4_analysis import (
+    build_week4_eda_outputs,
+    frozen_train_eda_tables,
+    load_frozen_training_frame,
+)
 
 train_only = load_frozen_training_frame(PROJECT_ROOT)
 eda_summary, numeric_summary, categorical_summary = frozen_train_eda_tables(train_only)
 print(json.dumps(eda_summary, indent=2, ensure_ascii=False))
 assert eda_summary["scope"] == "frozen_training_rows_only"
 assert not eda_summary["duration_materialized"]
+assert len(train_only) == 36_168
+assert eda_summary["target_counts"] == {"no": 31_937, "yes": 4_231}
+"""
+                ),
+                markdown(
+                    """
+## Biểu đồ EDA từ frozen training set
+
+Ba biểu đồ dưới đây được tạo trực tiếp từ 36.168 dòng train đã
+khóa. Pipeline kiểm tra fingerprint dataset, split và train indices trước
+khi ghi PNG; holdout không được materialize.
+"""
+                ),
+                code(
+                    """
+eda_figure_report = build_week4_eda_outputs(PROJECT_ROOT)
+assert eda_figure_report["status"] == "PASS"
+assert eda_figure_report["training_samples"] == 36_168
+assert eda_figure_report["statistics"]["target_counts"] == {"no": 31_937, "yes": 4_231}
+assert not eda_figure_report["holdout_materialized"]
+assert not eda_figure_report["duration_materialized"]
+for item in eda_figure_report["captions"]:
+    print(item["title"])
+    print("Caption:", item["caption"])
+    print("Nhận xét:", item["comment"])
+    print()
+"""
+                ),
+                markdown(
+                    """
+### Phân bố biến mục tiêu
+
+![Phân bố biến mục tiêu](../figures/week4/eda/01_target_distribution_train.png)
+
+**Caption:** Phân bố nhãn trên 36.168 mẫu train cố định: `no` = 31.937
+(88,30%) và `yes` = 4.231 (11,70%). Tập train mất cân bằng, với số
+mẫu `no` xấp xỉ 7,55 lần số mẫu `yes`.
+
+### Phân bố tuổi
+
+![Phân bố tuổi](../figures/week4/eda/02_age_distribution_train.png)
+
+**Caption:** Tuổi trung bình 40,89, trung vị 39 và khoảng tứ phân vị 33–48
+tuổi. Phân bố có đuôi phải do một số khách hàng lớn tuổi.
+
+### Phân bố số dư tài khoản
+
+![Phân bố số dư](../figures/week4/eda/03_balance_distribution_train.png)
+
+**Caption:** `balance` có trung bình 1.365,49, trung vị 451 và khoảng tứ phân
+vị 74–1.430,25. Biểu đồ chính giữ toàn bộ quan sát với trục tần số
+log; ô nhỏ P1–P99 chỉ phóng đại vùng mật độ cao, không loại dữ liệu.
 """
                 ),
                 markdown("## Numeric features"),

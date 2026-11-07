@@ -50,15 +50,20 @@ def build_hpo_pipeline(
     X: pd.DataFrame,
     config: dict[str, Any],
     params: dict[str, Any],
+    fixed_parameters: dict[str, Any] | None = None,
 ) -> Pipeline:
     """Build the same RF family/preprocessing with trial-controlled parameters."""
     baseline = config["baseline"]
+    fixed = config.get("fixed_parameters", {}) if fixed_parameters is None else fixed_parameters
+    class_weight = fixed.get("class_weight", params.get("class_weight"))
+    if class_weight == "None":
+        raise ValueError("class_weight must be None, not the string 'None'.")
     model = RandomForestClassifier(
         n_estimators=int(params["n_estimators"]),
-        max_depth=int(params["max_depth"]),
+        max_depth=None if params["max_depth"] is None else int(params["max_depth"]),
         min_samples_leaf=int(params["min_samples_leaf"]),
-        max_features=float(params["max_features"]),
-        class_weight=params["class_weight"],
+        max_features=params["max_features"] if isinstance(params["max_features"], str) else float(params["max_features"]),
+        class_weight=class_weight,
         random_state=int(baseline["random_state"]),
         n_jobs=int(baseline["n_jobs"]),
     )

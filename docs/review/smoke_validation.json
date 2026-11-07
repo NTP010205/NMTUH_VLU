@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "trials": 4,
+  "folds": 12,
+  "scope": "real frozen training rows; separate from full"
+}

@@ -4,7 +4,9 @@ import json
 from pathlib import Path
 
 from PIL import Image
+import pytest
 
+from src.data import sha256_file
 from src.week4_analysis import (
     PROJECT_ROOT,
     analysis_tables,
@@ -15,6 +17,11 @@ from src.week4_analysis import (
 )
 
 
+@pytest.mark.skipif(
+    not all((PROJECT_ROOT / 'results/hpo/ap_model_size_v1/full_run_01' /
+             f'{sampler}_seed42_ap_model_size_v1.db').is_file() for sampler in ['random', 'tpe']),
+    reason='Historical SQLite audit not checked: DBs are local-only; obtain the v1 evidence package',
+)
 def test_week4_official_sources_are_consistent() -> None:
     report = validate_sources(load_sources())
     assert report["status"] == "PASS"
@@ -23,6 +30,10 @@ def test_week4_official_sources_are_consistent() -> None:
     assert report["official_pareto_hash_count"] == 13
 
 
+@pytest.mark.skipif(
+    not (PROJECT_ROOT / 'data/raw/bank-full.csv').is_file(),
+    reason='Historical train EDA requires bank-full.csv; run scripts/download_data.py',
+)
 def test_week4_eda_materializes_only_frozen_train_without_duration() -> None:
     frame = load_frozen_training_frame()
     summary, numeric, categorical = frozen_train_eda_tables(frame)
@@ -61,6 +72,53 @@ def test_week4_figures_are_png_and_at_least_300_dpi() -> None:
         with Image.open(path) as image:
             dpi = image.info.get("dpi", (0, 0))
             assert dpi[0] >= 299 and dpi[1] >= 299
+
+
+def test_week4_eda_figures_use_locked_train_and_match_manifest() -> None:
+    manifest_path = PROJECT_ROOT / "results/analysis/week4/eda_figure_manifest.json"
+    report = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert report["status"] == "PASS"
+    assert report["scope"] == "frozen_training_rows_only"
+    assert report["training_samples"] == 36_168
+    assert report["statistics"]["target_counts"] == {"no": 31_937, "yes": 4_231}
+    assert report["dataset_sha256"] == "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d"
+    assert report["split_artifact_sha256"] == "583acb9dbb4ee92852b1d0a9b584cffb2f7b1fc6409dfdb495a46df4cb3d7d1a"
+    assert report["train_indices_sha256"] == "b078ac348228f8e49c30af463dc1198fb5e8e11d6379e5d842caf580fc728469"
+    assert report["duration_materialized"] is False
+    assert report["holdout_materialized"] is False
+    assert report["training_performed"] is False
+    assert report["hpo_performed"] is False
+
+    expected = {
+        "01_target_distribution_train.png": ["y"],
+        "02_age_distribution_train.png": ["age"],
+        "03_balance_distribution_train.png": ["balance"],
+    }
+    assert set(report["figures"]) == set(expected)
+    for name, source_columns in expected.items():
+        path = PROJECT_ROOT / "figures/week4/eda" / name
+        metadata = report["figures"][name]
+        assert path.is_file()
+        assert metadata["sha256"] == sha256_file(path)
+        assert metadata["source_columns"] == source_columns
+        assert metadata["source_scope"] == "frozen_training_rows_only"
+        with Image.open(path) as image:
+            dpi = image.info.get("dpi", (0, 0))
+            assert dpi[0] >= 319 and dpi[1] >= 319
+
+
+def test_dataset_eda_notebook_references_reproducible_figures() -> None:
+    notebook_path = PROJECT_ROOT / "notebooks/01_Dataset_EDA.ipynb"
+    payload = json.loads(notebook_path.read_text(encoding="utf-8"))
+    source = "\n".join(str(cell.get("source", "")) for cell in payload["cells"])
+    assert "build_week4_eda_outputs" in source
+    assert "assert len(train_only) == 36_168" in source
+    for filename in (
+        "01_target_distribution_train.png",
+        "02_age_distribution_train.png",
+        "03_balance_distribution_train.png",
+    ):
+        assert f"../figures/week4/eda/{filename}" in source
 
 
 def test_week4_notebooks_are_valid_json_with_safety_metadata() -> None:

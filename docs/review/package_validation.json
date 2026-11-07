@@ -1,0 +1,16 @@
+{
+  "original_files_preserved": 187,
+  "all_original_file_bytes_identical": true,
+  "python_files_syntax_checked": 26,
+  "training_performed": false,
+  "new_multiseed_results": false,
+  "removed_packaging_directories": [
+    ".git",
+    ".ipynb_checkpoints",
+    ".pytest_cache",
+    ".python",
+    ".uv-cache",
+    ".venv",
+    "__pycache__"
+  ]
+}

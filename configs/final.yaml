@@ -1,0 +1,38 @@
+protocol: ap_model_size_4hp_v2
+data_path: data/raw/bank-full.csv
+data_audit_reference: results/data_audit.json
+split_indices_reference: results/baseline/split_indices.npz
+cv_folds_reference: results/hpo/cv_folds_seed42.npz
+search_seeds: [42, 52, 62, 72, 82]
+samplers: [random, tpe]
+trials_per_sampler: 40
+smoke_trials_per_sampler: 2
+directions: [maximize, minimize]
+split:
+  test_fraction: 0.2
+  random_state: 42
+  cv_folds: 3
+  cv_shuffle: true
+baseline:
+  n_estimators: 100
+  max_depth: null
+  min_samples_leaf: 1
+  max_features: sqrt
+  class_weight: null
+  random_state: 42
+  n_jobs: 1
+fixed_parameters:
+  class_weight: null
+  random_state: 42
+  n_jobs: 1
+search_space:
+  n_estimators: {type: int, low: 50, high: 300, step: 25}
+  max_depth: {type: int, low: 4, high: 24}
+  min_samples_leaf: {type: int, low: 1, high: 12}
+  max_features: {type: float, low: 0.4, high: 1.0}
+tpe_startup_trials: 10
+size_cap_mb: 50.0
+compression: 3
+thread_limit: 1
+selection_tolerance: 0.005
+comparison_budgets: [10, 20, 40]

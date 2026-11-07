@@ -30,6 +30,15 @@ at parse time. It observes 4,231 positive and 31,937 negative training labels
 (11.6982% positive). Ten rows are duplicated after removing `duration`; this is
 a feature-space observation, not authorization to delete records.
 
+Three report-ready EDA figures are generated independently under
+`figures/week4/eda/` at 320 DPI: target-label counts and percentages, age, and
+account balance. The balance overview retains all observations on a logarithmic
+count axis; its P1–P99 inset is only a magnified view, not an outlier filter.
+Vietnamese captions and interpretations are generated in
+`docs/week4_eda_figures.md`. The EDA generator validates the dataset, split and
+train-index hashes and records that neither holdout materialization, training
+nor HPO occurred.
+
 ## Main results
 
 | Model/reference | CV AP mean ± std | Serialized size | Measurement scope |
