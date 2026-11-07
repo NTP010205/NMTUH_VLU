@@ -1,0 +1,2 @@
+origin	https://github.com/NTP010205/bank-marketing-pareto-hpo.git (fetch)
+origin	https://github.com/NTP010205/bank-marketing-pareto-hpo.git (push)

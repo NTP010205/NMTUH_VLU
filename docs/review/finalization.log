@@ -1,0 +1,123 @@
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+D:\Th\u1ef1c hαnh\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\src\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.
+  pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+Report sources verified; 10 content pages planned plus 2 appendices. Render QA still required for DOCX.
+{"status": "PASS", "checked": 111, "missing_not_checked": [], "changed": []}
+Full analysis, refit, sensitivity and report content complete. DOCX render QA and clean-checkout acceptance remain.

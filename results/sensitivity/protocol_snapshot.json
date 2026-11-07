@@ -1,0 +1,26 @@
+{
+  "selected_hash": "c1a236ce7be07b24f9cecad2645f2a07bf208d0d97de41d8c188e9497e343909",
+  "fingerprint": "ba1942c2ab39e5c2950e6410e9e7804cfc948f10e7aebe762d34c59b4a6039e3",
+  "values": {
+    "n_estimators": [
+      50,
+      75
+    ],
+    "max_depth": [
+      13,
+      14,
+      15
+    ],
+    "min_samples_leaf": [
+      10,
+      11,
+      12
+    ],
+    "max_features": [
+      0.5468411998858647,
+      0.6468411998858646,
+      0.7468411998858646
+    ]
+  },
+  "selection_must_not_change": true
+}

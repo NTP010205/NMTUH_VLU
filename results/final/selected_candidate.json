@@ -1,0 +1,72 @@
+{
+  "candidate": {
+    "run_id": "ap_model_size_4hp_v2_full_seed62_random",
+    "protocol": "ap_model_size_4hp_v2",
+    "search_seed": 62,
+    "model_seed": 42,
+    "sampler": "random",
+    "trial": 0,
+    "status": "COMPLETE",
+    "class_weight": null,
+    "config_hash": "c1a236ce7be07b24f9cecad2645f2a07bf208d0d97de41d8c188e9497e343909",
+    "dataset_sha256": "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d",
+    "split_sha256": "583acb9dbb4ee92852b1d0a9b584cffb2f7b1fc6409dfdb495a46df4cb3d7d1a",
+    "folds_sha256": "149fca7f07d85b8afabde2ed23c1eba22927d16c30b506b3b6ba1902c000b769",
+    "n_estimators": 50,
+    "max_depth": 14,
+    "min_samples_leaf": 11,
+    "max_features": 0.6468411998858646,
+    "error": null,
+    "runtime_seconds": 6.366114299999936,
+    "g": -49.264521,
+    "feasible": true,
+    "average_precision_cv_mean": 0.4432943298692702,
+    "average_precision_cv_std": 0.005828020226865103,
+    "model_size_max_bytes": 735479.0,
+    "model_size_max_mb": 0.735479,
+    "model_size_max_mib": 0.7014074325561523,
+    "fit_seconds_total": 5.946471599999313,
+    "predict_seconds_total": 0.18895769999926415,
+    "serialization_seconds_total": 0.15856780000103754
+  },
+  "parameters": {
+    "n_estimators": 50,
+    "max_depth": 14,
+    "min_samples_leaf": 11,
+    "max_features": 0.6468411998858646
+  },
+  "full_train": {
+    "full_train_size_bytes": 918818,
+    "full_train_size_mb": 0.918818,
+    "feasible": true,
+    "sha256": "495b5db60535b41e096ac1532ca45c96f7c08690548054b8794d86f0d213e82b",
+    "runtime_seconds": 2.99706389999983
+  },
+  "refit_attempts": [
+    {
+      "config_hash": "c1a236ce7be07b24f9cecad2645f2a07bf208d0d97de41d8c188e9497e343909",
+      "full_train_size_bytes": 918818,
+      "full_train_size_mb": 0.918818,
+      "feasible": true,
+      "sha256": "495b5db60535b41e096ac1532ca45c96f7c08690548054b8794d86f0d213e82b",
+      "runtime_seconds": 2.99706389999983
+    }
+  ],
+  "pooled_budget": 400,
+  "tolerance": 0.005,
+  "selection_scope": "pooled complete feasible trials",
+  "holdout_used": false,
+  "source_manifests": {
+    "seed_42\\random\\manifest.json": "1da5d64d362730c2b8bd264576e28ce0d8f76a931175a0808f078970ef671078",
+    "seed_42\\tpe\\manifest.json": "5d508d973e33131c3dfbbe3ea43a449634c8a72a5abd12a21055be2f82b70092",
+    "seed_52\\random\\manifest.json": "f313cc97484f25f916062a7a302ea993169cd7d8b3c746fad5c768c9cba7529b",
+    "seed_52\\tpe\\manifest.json": "9eac6e307f9335bf8159908b5fbfb6bd46a870a4ab386bb7217c6ed67991fc11",
+    "seed_62\\random\\manifest.json": "b4933dc9a44f18afe6e1b47814a2d688093b69e5296b7e46f50be5f52eef871d",
+    "seed_62\\tpe\\manifest.json": "75ea3f7fb0f2832a074743bc8f7a2775eb88e8409b1c7c2231ac373cdb805694",
+    "seed_72\\random\\manifest.json": "32d2a9626a40c3b5382a6da0458c0a09d5b582345b5062a34bfa246af6bdd371",
+    "seed_72\\tpe\\manifest.json": "6bff44f21290e63b8227d3ceaaa831fad519ef5adc01ddf24838f77fe5182e5c",
+    "seed_82\\random\\manifest.json": "3cd1d84bbc79d12f2684cc5aa242468c662897912883dc14dece915852043a6c",
+    "seed_82\\tpe\\manifest.json": "e496caf698be10e6ade043c3ca23ef012b4e8771da5ffec7561338b1b7597631"
+  },
+  "fingerprint": "ba1942c2ab39e5c2950e6410e9e7804cfc948f10e7aebe762d34c59b4a6039e3"
+}

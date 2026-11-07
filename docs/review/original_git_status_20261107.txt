@@ -1,0 +1,22 @@
+## main...origin/main
+ M README.md
+ M docs/week4_experiment_analysis.md
+ M figures/week4/01_best_so_far_cv_ap.pdf
+ M figures/week4/02_ap_vs_model_size.pdf
+ M figures/week4/03_pareto_selected.pdf
+ M figures/week4/04_model_size_distribution.pdf
+ M figures/week4/05_cumulative_search_time.pdf
+ M figures/week4/06_key_models_comparison.pdf
+ M figures/week4/07_ap_loss_vs_size_reduction.pdf
+ M notebooks/01_Dataset_EDA.ipynb
+ M notebooks/02_Baseline_Analysis.ipynb
+ M notebooks/03_HPO_Comparison.ipynb
+ M results/analysis/week4/analysis_manifest.json
+ M results/analysis/week4/notebook_validation.json
+ M scripts/build_week4_notebooks.py
+ M src/week4_analysis.py
+ M tests/test_week4_analysis.py
+?? docs/week4_eda_figures.md
+?? figures/week4/eda/
+?? results/analysis/week4/eda_figure_manifest.json
+?? scripts/build_week4_eda_figures.py

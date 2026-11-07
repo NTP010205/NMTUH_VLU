@@ -1,0 +1,97 @@
+{
+  "fingerprint": "ba1942c2ab39e5c2950e6410e9e7804cfc948f10e7aebe762d34c59b4a6039e3",
+  "parameters": {
+    "n_estimators": 100,
+    "max_depth": null,
+    "min_samples_leaf": 1,
+    "max_features": "sqrt"
+  },
+  "fixed_parameters": {
+    "class_weight": null,
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "folds": [
+    {
+      "fold": 1,
+      "fit_samples": 24112,
+      "validation_samples": 12056,
+      "average_precision": 0.410532729763309,
+      "fit_seconds": 1.688054000000193,
+      "predict_seconds": 0.15297279999958846,
+      "model_size_bytes": 9473882,
+      "model_size_mb": 9.473882,
+      "model_size_mib": 9.034997940063477,
+      "artifact_sha256": "d40c33463b210547f8f311223e234e4cdaf31deabc328c36761d5a3461cae9e4",
+      "repeat_size_bytes": null,
+      "repeat_artifact_sha256": null,
+      "repeat_serialization_exact": true,
+      "serialization_seconds": 0.4247693999996045,
+      "pipeline_steps": [
+        "preprocess",
+        "model"
+      ],
+      "fit_positions_sha256": "7a90c624fd48b53712d8a6ba44f092b0c702cc4da93c18d1fb6e70355e4ac52c",
+      "validation_positions_sha256": "447f0d9fe45d59fc224972c08b38e37e00ddbb97566084caa99c90ed12aa51ff",
+      "fit_original_indices_sha256": "9a2a44f01af37282c4671a659c6d534e4a1360ae4e7d658d3ca4c64ca045469f",
+      "validation_original_indices_sha256": "a07a8372a6293af805d565e6f300c52db0980ef6573329d57cbf6f76562120e0"
+    },
+    {
+      "fold": 2,
+      "fit_samples": 24112,
+      "validation_samples": 12056,
+      "average_precision": 0.4235146586253897,
+      "fit_seconds": 1.6705864000005022,
+      "predict_seconds": 0.15205129999958444,
+      "model_size_bytes": 9460269,
+      "model_size_mb": 9.460269,
+      "model_size_mib": 9.022015571594238,
+      "artifact_sha256": "feb1cae22c31c7fb6dc615e5cbac5612a52d91d5572d90402769f18b6f5abf85",
+      "repeat_size_bytes": null,
+      "repeat_artifact_sha256": null,
+      "repeat_serialization_exact": true,
+      "serialization_seconds": 0.4217079999998532,
+      "pipeline_steps": [
+        "preprocess",
+        "model"
+      ],
+      "fit_positions_sha256": "977e2f4db0efc4db3ce3e2549609ca83b0228a5510e6038d0fa0064ec39f2371",
+      "validation_positions_sha256": "0c0f25b924acc7f4dca6e9970a5b17b3c282974d78427a4da03539429edbf75a",
+      "fit_original_indices_sha256": "76858ccc99a6412678e7a786a4162b62503e83e4df99099b6ed054e774b764d4",
+      "validation_original_indices_sha256": "9c282d447a574cfe36bf1bd3610b6d03fbccc7fd70e706a997caebf3d1e16e7a"
+    },
+    {
+      "fold": 3,
+      "fit_samples": 24112,
+      "validation_samples": 12056,
+      "average_precision": 0.4105347713854031,
+      "fit_seconds": 1.6248880000002828,
+      "predict_seconds": 0.14923969999927067,
+      "model_size_bytes": 9392069,
+      "model_size_mb": 9.392069,
+      "model_size_mib": 8.956974983215332,
+      "artifact_sha256": "ca427ab2a05f50d545bdbd6a34cd424af226af804e552e69d3aac772bbadf900",
+      "repeat_size_bytes": null,
+      "repeat_artifact_sha256": null,
+      "repeat_serialization_exact": true,
+      "serialization_seconds": 0.4206962999996904,
+      "pipeline_steps": [
+        "preprocess",
+        "model"
+      ],
+      "fit_positions_sha256": "881a880bb1c9ad24968a736ca17d42e5e729347529e1ad5a3875f916b321f13e",
+      "validation_positions_sha256": "b0b7a012e1a492e50d1a0794003b29edd2b7977d1fb01d9e961bd4869fad8b7b",
+      "fit_original_indices_sha256": "684d9ad80448f6e0f3ccc173f91df3def9b78a80ce52a48a2851059411a3d7b7",
+      "validation_original_indices_sha256": "591d5aacaa03c97ade6b66278668831c217878460fbfc8ddf1317098a2c4110f"
+    }
+  ],
+  "average_precision_cv_mean": 0.4148607199247006,
+  "average_precision_cv_std": 0.007494530827111077,
+  "model_size_max_bytes": 9473882,
+  "model_size_max_mb": 9.473882,
+  "model_size_max_mib": 9.034997940063477,
+  "fit_seconds_total": 4.983528400000978,
+  "predict_seconds_total": 0.4542637999984436,
+  "serialization_seconds_total": 1.267173699999148,
+  "runtime_seconds": 6.737169199999698
+}

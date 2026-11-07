@@ -160,6 +160,7 @@ def build_pages(data):
          p('Cố định class_weight=None là quyết định thu gọn phạm vi, không chứng minh class_weight không ảnh hưởng. Model random_state, split seed và CV seed đều bằng 42; n_jobs=1. Chỉ seed của sampler thay đổi giữa các search runs.'))
     page('3 Phương pháp',
          p('Random Search lấy mẫu từ miền đã định nghĩa mà không sử dụng giá trị mục tiêu của các trial trước để định hướng đề xuất. TPE dùng lịch sử đánh giá để điều chỉnh phân phối đề xuất. Với Optuna 4.9.0, TPESampler được chỉ định tường minh cho bài toán hai mục tiêu và có n_startup_trials=10 [3]. Các thiết lập này không thay đổi sau khi xem kết quả.'),
+         p('TPE ước lượng hai mật độ: một từ các giá trị tham số của nhóm kết quả tốt và một từ phần còn lại, rồi ưu tiên đề xuất có tỷ số mật độ thuận lợi. Trong phiên bản đa mục tiêu, trọng số của nhóm tốt dựa trên đóng góp hypervolume [3]. Đầu vào là miền biến và lịch sử mục tiêu; đầu ra là cấu hình tiếp theo, được đánh giá bằng cùng CV. TPE không cần gradient của RF.'),
          p('Mỗi seed s tạo một RandomSampler(seed=s) và một TPESampler(seed=s, n_startup_trials=10, constraints_func=...). Ràng buộc trả về g=S−50; giá trị không dương là khả thi. Cả hai phương pháp dùng chung data split, CV folds, mô hình, miền và ngân sách attempted trials. Trials lỗi được ghi lý do và không được tự động chạy bù vô hạn.'),
          p('Một cấu hình bị trội nếu tồn tại cấu hình khả thi khác có AP không thấp hơn, size không lớn hơn và ít nhất một mục tiêu tốt hơn nghiêm ngặt. Tập Pareto được tính từ COMPLETE+feasible, loại cấu hình trùng khi đếm. Các cấu hình bằng nhau giữa hai sampler không được coi là hai khám phá độc lập.'),
          p('Quy tắc khóa trước chạy: xác định AP_best trong tập khả thi, giữ AP ≥ AP_best−0,005, rồi chọn size CV nhỏ nhất. Thứ tự hòa tiếp theo là AP cao hơn, fold std nhỏ hơn, config_hash, sampler, trial. Các tham số này không được điều chỉnh theo holdout.'),
@@ -196,8 +197,10 @@ def build_pages(data):
          f('convergence.png', 'Hình 1 Best-so-far AP trung bình và sample std giữa các search seeds. Dải biểu diễn độ phân tán giữa runs, không phải khoảng tin cậy.'),
          t(['Sampler', 'Budget', 'AP mean', 'AP std giữa runs'], budget_rows,
            'Bảng 4 Best-so-far tại 10, 20 và 40 attempted trials, tính từ budget_summary.csv'),
-         p('Mỗi đường theo seed lấy AP khả thi cao nhất đã quan sát đến ngân sách tương ứng. Trial lỗi vẫn chiếm một đơn vị ngân sách; đường best-so-far không tăng từ trial đó. Việc dùng cùng ngân sách giúp đọc trực tiếp hiệu quả tìm kiếm trong phạm vi thực nghiệm.'),
+         p('Mỗi đường theo seed lấy AP khả thi cao nhất đã quan sát đến ngân sách tương ứng. Trial lỗi vẫn chiếm một đơn vị ngân sách; đường best-so-far không tăng từ trial đó. Khi một run chưa có nghiệm khả thi, giá trị để trống và không tham gia mean/std tại mốc ấy; bảng 10/20/40 dùng đủ các runs có kết quả. Việc dùng cùng ngân sách giúp đọc trực tiếp hiệu quả tìm kiếm trong phạm vi thực nghiệm.'),
          p('Số cấu hình startup giống nhau theo từng seed: ' + '; '.join(f"seed {r['search_seed']}: {r['identical_startup_configs']}/{r['compared']}" for r in data['tables']['startup_duplicates']) + '. Khi startup trùng nhau, hai phương pháp dùng cùng các điểm khởi đầu; không diễn giải chúng là các khám phá độc lập.'))
+    if failed:
+        pages[-1]['blocks'].append(p('Bảng startup đối chiếu 10 attempted trials đầu. Optuna không dùng FAIL làm đánh giá mục tiêu; một lỗi trong giai đoạn này có thể kéo dài số attempted trials lấy mẫu ngẫu nhiên trước khi TPE đủ dữ liệu khởi tạo. Ngân sách tổng vẫn giữ 40 attempted trials mỗi study.'))
     page('5 Pareto và nghiệm cuối',
          f('pareto.png', 'Hình 2 AP và dung lượng max-fold của các trial khả thi, Pareto gộp và nghiệm cuối theo quy tắc đã khóa.'),
          t(['Siêu tham số', 'Giá trị được chọn'], [[pname, str(params[pname])] for pname in PARAMS], 'Bảng 5 Bốn giá trị của nghiệm cuối'),

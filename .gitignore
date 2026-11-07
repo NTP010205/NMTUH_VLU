@@ -9,6 +9,7 @@ pytest-cache-files-*/
 *.tmp
 *.pid
 report/qa/
+docs/review/source_documents/
 .coverage
 htmlcov/
 .idea/

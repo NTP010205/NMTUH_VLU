@@ -1,0 +1,28 @@
+{
+  "status": "PARTIAL_SOURCE_PASS",
+  "attempted": 80,
+  "complete": 79,
+  "failed": 1,
+  "runs": [
+    {
+      "search_seed": 42,
+      "sampler": "random",
+      "csv_json_folds": "PASS",
+      "sqlite": "not checked (database absent)",
+      "manifest_sha256": "1da5d64d362730c2b8bd264576e28ce0d8f76a931175a0808f078970ef671078",
+      "recorded_fold_fits": 119,
+      "fold_fits_from_complete_trials": 117,
+      "wall_seconds": 868.2188190000004
+    },
+    {
+      "search_seed": 42,
+      "sampler": "tpe",
+      "csv_json_folds": "PASS",
+      "sqlite": "not checked (database absent)",
+      "manifest_sha256": "5d508d973e33131c3dfbbe3ea43a449634c8a72a5abd12a21055be2f82b70092",
+      "recorded_fold_fits": 120,
+      "fold_fits_from_complete_trials": 120,
+      "wall_seconds": 629.8334990000003
+    }
+  ]
+}

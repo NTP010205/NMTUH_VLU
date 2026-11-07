@@ -22,8 +22,44 @@ Giữ COMPLETE+feasible với AP cách best không quá 0,005; chọn CV size nh
 ## Kết quả v2
 
 <!-- FINAL_RESULTS_START -->
-Đang chạy full. Chưa có kết luận cuối, selected candidate hoặc báo cáo nộp v2. Smoke riêng đã qua 4 trials/12 folds; 58 tests PASS trước full. Theo dõi `results/final/seed_XX/{random,tpe}/manifest.json` và `docs/review/full_v2.log`.
+Đã hoàn thành ngân sách 400 attempted trials: 398 COMPLETE, 2 FAIL. Các lỗi vẫn được tính vào budget và giữ trong logs.
+
+| Sampler | Best AP mean ± std giữa 5 runs | AP chọn mean ± std |
+|---|---:|---:|
+| random | 0.446143 ± 0.000503 | 0.442222 ± 0.001157 |
+| tpe | 0.445613 ± 0.000367 | 0.441515 ± 0.000622 |
+
+Baseline CV AP: 0.414861 ± 0.007495 (std giữa folds). Nghiệm cuối từ ngân sách gộp: `n_estimators=50`, `max_depth=14`, `min_samples_leaf=11`, `max_features=0.6468411998858646`.
+
+Selected CV AP 0.443294, max-fold size 0.735 MB; full-train size 0.919 MB.
+
+Nguồn: [run_summary.csv](results/analysis/final/run_summary.csv), [sampler_summary.csv](results/analysis/final/sampler_summary.csv), [selected_candidate.json](results/final/selected_candidate.json).
+
+![Best-so-far AP giữa seeds](figures/final/convergence.png)
+
+![Pareto và nghiệm chọn](figures/final/pareto.png)
+
+Báo cáo nội dung: [Bao_cao_NMTUH.md](report/Bao_cao_NMTUH.md). Tóm tắt bảo vệ: [Tom_tat_bao_ve.md](report/Tom_tat_bao_ve.md). File Word chỉ được nghiệm thu sau khi render và kiểm tra từng trang.
 <!-- FINAL_RESULTS_END -->
+
+## Phương pháp và giới hạn
+
+Random Search lấy mẫu cấu hình trong miền đã khóa. Optuna TPE dùng lịch sử đánh giá để điều chỉnh các đề xuất; 10 trial khởi tạo lấy mẫu ngẫu nhiên. Hai sampler dùng cùng dữ liệu, folds và ngân sách attempted. Baseline là RF mặc định; việc tìm kiếm không cố ý làm baseline yếu đi.
+
+Năm search seeds chỉ mô tả biến động tìm kiếm trên cùng dữ liệu và folds. CV được dùng để chọn nghiệm nên có thiên lệch lựa chọn; chưa có đánh giá độc lập trên dữ liệu mới. Holdout từng được baseline v1 đánh giá và không dùng để tuning v2. Dung lượng Joblib không đại diện cho RAM hoặc latency. Không kết luận tối ưu toàn cục hay TPE luôn thắng; lỗi vận hành vẫn tính vào ngân sách và được công bố.
+
+## Cấu trúc repository
+
+| Đường dẫn | Nội dung |
+|---|---|
+| `configs/final.yaml` | Protocol v2, miền bốn biến, seeds và ngân sách |
+| `src/`, `tests/` | Runner, phân tích, chọn nghiệm và kiểm thử hành vi |
+| `results/final/` | Baseline và logs chính thức v2 theo seed/sampler |
+| `results/analysis/final/`, `figures/final/` | Bảng và hình dựng từ logs v2 |
+| `results/sensitivity/` | Đánh giá lân cận sau khi khóa nghiệm |
+| `report/` | Báo cáo cuối, tóm tắt bảo vệ và báo cáo rà soát lịch sử |
+| `notebooks/`, `docs/archive/` | Notebooks v1 và chỉ mục lịch sử; không đổi nhãn thành v2 |
+| `data/README.md` | Nguồn dữ liệu, cách tải và checksum |
 
 ## Cài đặt và dữ liệu
 

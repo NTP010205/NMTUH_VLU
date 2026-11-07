@@ -1,0 +1,44 @@
+.............................................s.......s........           [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:64
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\.venv\\Lib\\site-packages\\matplotlib\\_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'\n    prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\.venv\\Lib\\site-packages\\matplotlib\\_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'\n    parse = parser.parseString(pattern)
+
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89
+.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\.venv\\Lib\\site-packages\\matplotlib\\_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'\n    parser.resetCache()
+
+.venv\Lib\site-packages\matplotlib\_mathtext.py:45
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\.venv\\Lib\\site-packages\\matplotlib\\_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'\n    ParserElement.enablePackrat()
+
+tests/test_final_v2.py::test_interruption_resume_preserves_sampler_sequence
+tests/test_final_v2.py::test_tpe_resume_after_startup_preserves_adaptive_sequence
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\.venv\\Lib\\site-packages\\optuna\\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.\n    optuna_warn(
+
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+tests/test_final_v2.py::test_export_analysis_without_database_and_reject_tampering
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\src\\analyze_results.py:82: FutureWarning: Mismatched null-like values None and nan found. In a future version, pandas equality-testing functions (e.g. assert_frame_equal) will consider these not-matching and raise.\n    pd.testing.assert_frame_equal(frame, csv[frame.columns], check_dtype=False,
+
+tests/test_optimize_ap_model_size.py::test_selection_rule_and_unique_pareto_are_deterministic
+  D:\\Th\u1ef1c h\xe0nh\\NMTUH\\project\\NMTUH_VLU_goi_gon_va_huong_dan\\NMTUH_VLU_clean_check\\src\\optimize_ap_model_size.py:855: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.\n    axis.boxplot(values, labels=samplers, showmeans=True)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+60 passed, 2 skipped, 26 warnings in 15.43s

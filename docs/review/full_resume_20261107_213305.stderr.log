@@ -1,0 +1,14 @@
+[I 2026-11-07 21:33:07,619] Using an existing study with name 'ap_model_size_4hp_v2_full_seed42_random' instead of creating a new one.
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-07 21:33:07,824] Using an existing study with name 'ap_model_size_4hp_v2_full_seed42_tpe' instead of creating a new one.
+[I 2026-11-07 21:33:07,973] Using an existing study with name 'ap_model_size_4hp_v2_full_seed52_random' instead of creating a new one.
+[I 2026-11-07 21:33:08,124] Using an existing study with name 'ap_model_size_4hp_v2_full_seed52_tpe' instead of creating a new one.
+[I 2026-11-07 21:33:08,331] Using an existing study with name 'ap_model_size_4hp_v2_full_seed62_random' instead of creating a new one.
+[I 2026-11-07 21:33:08,552] Using an existing study with name 'ap_model_size_4hp_v2_full_seed62_tpe' instead of creating a new one.
+[I 2026-11-07 21:33:08,836] Using an existing study with name 'ap_model_size_4hp_v2_full_seed72_random' instead of creating a new one.
+[I 2026-11-07 21:33:09,217] Using an existing study with name 'ap_model_size_4hp_v2_full_seed72_tpe' instead of creating a new one.
+[I 2026-11-07 21:45:57,478] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed82_random
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-07 21:59:53,032] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed82_tpe

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "n_estimators": 50,
+    "max_depth": 14,
+    "min_samples_leaf": 12,
+    "max_features": 0.6468411998858646
+  },
+  "fingerprint": "ba1942c2ab39e5c2950e6410e9e7804cfc948f10e7aebe762d34c59b4a6039e3",
+  "config_hash": "73ab44a95b7a15b8c48560042d0a846454c21c9a30efbdfd7e14ddfe82939876",
+  "folds": [
+    {
+      "fold": 1,
+      "fit_samples": 24112,
+      "validation_samples": 12056,
+      "average_precision": 0.43679343692777134,
+      "fit_seconds": 1.9522073999996792,
+      "predict_seconds": 0.06280460000016319,
+      "model_size_bytes": 717864,
+      "model_size_mb": 0.717864,
+      "model_size_mib": 0.6846084594726562,
+      "artifact_sha256": "8e592dc5af88ad707801dd838c4457ffb41eaa3e8279b970f0da6f82fe30f755",
+      "repeat_size_bytes": null,
+      "repeat_artifact_sha256": null,
+      "repeat_serialization_exact": true,
+      "serialization_seconds": 0.04961010000033639,
+      "pipeline_steps": [
+        "preprocess",
+        "model"
+      ],
+      "fit_positions_sha256": "7a90c624fd48b53712d8a6ba44f092b0c702cc4da93c18d1fb6e70355e4ac52c",
+      "validation_positions_sha256": "447f0d9fe45d59fc224972c08b38e37e00ddbb97566084caa99c90ed12aa51ff",
+      "fit_original_indices_sha256": "9a2a44f01af37282c4671a659c6d534e4a1360ae4e7d658d3ca4c64ca045469f",
+      "validation_original_indices_sha256": "a07a8372a6293af805d565e6f300c52db0980ef6573329d57cbf6f76562120e0"
+    },
+    {
+      "fold": 2,
+      "fit_samples": 24112,
+      "validation_samples": 12056,
+      "average_precision": 0.44493808339174995,
+      "fit_seconds": 1.9730521000001318,
+      "predict_seconds": 0.06052170000020851,
+      "model_size_bytes": 700404,
+      "model_size_mb": 0.700404,
+      "model_size_mib": 0.6679573059082031,
+      "artifact_sha256": "c15feb5495c269d11223d1bb584d0e2b250eeec1f767b0b1f0ef2e64a51c6021",
+      "repeat_size_bytes": null,
+      "repeat_artifact_sha256": null,
+      "repeat_serialization_exact": true,
+      "serialization_seconds": 0.0506601000001865,
+      "pipeline_steps": [
+        "preprocess",
+        "model"
+      ],
+      "fit_positions_sha256": "977e2f4db0efc4db3ce3e2549609ca83b0228a5510e6038d0fa0064ec39f2371",
+      "validation_positions_sha256": "0c0f25b924acc7f4dca6e9970a5b17b3c282974d78427a4da03539429edbf75a",
+      "fit_original_indices_sha256": "76858ccc99a6412678e7a786a4162b62503e83e4df99099b6ed054e774b764d4",
+      "validation_original_indices_sha256": "9c282d447a574cfe36bf1bd3610b6d03fbccc7fd70e706a997caebf3d1e16e7a"
+    },
+    {
+      "fold": 3,
+      "fit_samples": 24112,
+      "validation_samples": 12056,
+      "average_precision": 0.4450867704609536,
+      "fit_seconds": 1.9847774999998364,
+      "predict_seconds": 0.06242180000026565,
+      "model_size_bytes": 690801,
+      "model_size_mb": 0.690801,
+      "model_size_mib": 0.6587991714477539,
+      "artifact_sha256": "555bb0773d9d2e1a909fdaf47bc56857f8592832b40236b308a3cc2054dc683f",
+      "repeat_size_bytes": null,
+      "repeat_artifact_sha256": null,
+      "repeat_serialization_exact": true,
+      "serialization_seconds": 0.04661339999984193,
+      "pipeline_steps": [
+        "preprocess",
+        "model"
+      ],
+      "fit_positions_sha256": "881a880bb1c9ad24968a736ca17d42e5e729347529e1ad5a3875f916b321f13e",
+      "validation_positions_sha256": "b0b7a012e1a492e50d1a0794003b29edd2b7977d1fb01d9e961bd4869fad8b7b",
+      "fit_original_indices_sha256": "684d9ad80448f6e0f3ccc173f91df3def9b78a80ce52a48a2851059411a3d7b7",
+      "validation_original_indices_sha256": "591d5aacaa03c97ade6b66278668831c217878460fbfc8ddf1317098a2c4110f"
+    }
+  ],
+  "average_precision_cv_mean": 0.4422727635934916,
+  "average_precision_cv_std": 0.004745818421873312,
+  "model_size_max_bytes": 717864,
+  "model_size_max_mb": 0.717864,
+  "model_size_max_mib": 0.6846084594726562,
+  "fit_seconds_total": 5.910036999999647,
+  "predict_seconds_total": 0.18574810000063735,
+  "serialization_seconds_total": 0.14688360000036482,
+  "runtime_seconds": 6.262493100000029
+}

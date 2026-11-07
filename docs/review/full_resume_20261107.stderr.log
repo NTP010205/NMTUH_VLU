@@ -1,1 +1,16 @@
 [I 2026-11-07 15:55:05,026] Using an existing study with name 'ap_model_size_4hp_v2_full_seed42_random' instead of creating a new one.
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-07 16:03:36,651] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed42_tpe
+[I 2026-11-07 16:14:06,848] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed52_random
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-07 16:33:42,951] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed52_tpe
+[I 2026-11-07 16:43:27,567] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed62_random
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-07 16:58:32,108] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed62_tpe
+[I 2026-11-07 17:08:24,883] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed72_random
+D:\Th\u1ef1c hành\NMTUH\project\NMTUH_VLU_goi_gon_va_huong_dan\NMTUH_VLU\.venv\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``constraints_func`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-11-07 17:20:51,203] A new study created in RDB with name: ap_model_size_4hp_v2_full_seed72_tpe
