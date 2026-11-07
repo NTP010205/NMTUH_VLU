@@ -89,6 +89,30 @@ def test_failures_consume_budget(tmp_path):
     assert all('test failure' in r['error'] for r in rows)
 
 
+def test_tpe_resume_after_startup_preserves_adaptive_sequence(tmp_path, monkeypatch):
+    cfg, context = config(), fake_context()
+    original_save = runner.save_sampler
+    checkpoint_calls = 0
+    def pause_after_completed_trial(sampler, path, count, fp):
+        nonlocal checkpoint_calls
+        original_save(sampler, path, count, fp)
+        checkpoint_calls += 1
+        # Two checkpoints per trial: after suggestions and after tell. Pause
+        # after the twelfth COMPLETE trial, beyond TPE's ten startup trials.
+        if checkpoint_calls == 24:
+            raise KeyboardInterrupt()
+    monkeypatch.setattr(runner, 'save_sampler', pause_after_completed_trial)
+    with pytest.raises(KeyboardInterrupt):
+        runner.run_study(cfg, context, tmp_path / 'resumed', 42, 'tpe', 15, 'full', fake_evaluate)
+    monkeypatch.setattr(runner, 'save_sampler', original_save)
+    runner.run_study(cfg, context, tmp_path / 'resumed', 42, 'tpe', 15, 'full', fake_evaluate)
+    runner.run_study(cfg, context, tmp_path / 'uninterrupted', 42, 'tpe', 15, 'full', fake_evaluate)
+    resumed = runner.read_json(tmp_path / 'resumed/seed_42/tpe/trials.json')
+    uninterrupted = runner.read_json(tmp_path / 'uninterrupted/seed_42/tpe/trials.json')
+    assert all(r['status'] == 'COMPLETE' for r in resumed)
+    assert [r['config_hash'] for r in resumed] == [r['config_hash'] for r in uninterrupted]
+
+
 def test_fold_aggregates_are_recomputed():
     record = fake_evaluate(None, None, None, None, None)
     folds = pd.DataFrame(record.pop('folds'))
@@ -195,3 +219,15 @@ def test_report_rejects_partial_runs_and_changed_figures(tmp_path):
     runner.atomic_json(manifest, analysis / 'analysis_manifest.json')
     with pytest.raises(ValueError, match='Figure hash mismatch'):
         audited_sources(root)
+
+
+def test_reproduction_finalization_does_not_overwrite_official_outputs(monkeypatch):
+    from src import finalize_experiments as finalizer
+    calls = []
+    monkeypatch.setattr(finalizer, 'finalize', lambda *args: calls.append(args))
+    finalizer.main(['--input', 'results/reproduction'])
+    root, sensitivity, figures, analysis = calls[0]
+    assert root.name == 'reproduction'
+    assert sensitivity.name == 'sensitivity_reproduction'
+    assert figures.parts[-2:] == ('figures', 'reproduction')
+    assert analysis.parts[-3:] == ('results', 'analysis', 'reproduction')

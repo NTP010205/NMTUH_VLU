@@ -22,8 +22,12 @@ data/raw/*
 
 # Local studies and large serialized artifacts.
 *.db
+*.db-wal
+*.db-shm
+*.db-journal
 *.sqlite
 *.sqlite3
+~$*
 results/**/*.joblib
 results/**/*.pkl
 results/**/*.pickle

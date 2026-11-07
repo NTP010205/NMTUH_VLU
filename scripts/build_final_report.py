@@ -9,6 +9,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import statistics
 from pathlib import Path
 
@@ -76,6 +77,9 @@ def audited_sources(root):
             raise ValueError('Selection source manifest mismatch')
     if selected['fingerprint'] != baseline['fingerprint'] or not selected['full_train']['feasible']:
         raise ValueError('Selected full-train audit invalid')
+    baseline_full = read_json(run / 'baseline_full_train.json')
+    if baseline_full['fingerprint'] != baseline['fingerprint']:
+        raise ValueError('Baseline full-train audit belongs to another experiment')
     sensitivity_manifest = read_json(root / 'results/sensitivity/manifest.json')
     if sensitivity_manifest['selected_hash'] != selected['candidate']['config_hash']:
         raise ValueError('Sensitivity belongs to a different selection')
@@ -89,8 +93,17 @@ def audited_sources(root):
     trials = [row for p in run.glob('seed_*/*/trials.json') for row in read_json(p)]
     if len(trials) != expected:
         raise ValueError('Unexpected report trial count')
+    candidate = selected['candidate']
+    matching = [r for r in trials if all(r[k] == candidate[k] for k in ['search_seed', 'sampler', 'trial'])]
+    if len(matching) != 1 or matching[0]['status'] != 'COMPLETE' or not matching[0]['feasible']:
+        raise ValueError('Selected trial is absent or ineligible in audited logs')
+    evidence = matching[0]
+    if evidence['config_hash'] != candidate['config_hash'] or selected['parameters'] != {k: evidence[k] for k in PARAMS}:
+        raise ValueError('Selected parameters differ from audited trial')
+    if any(not math.isclose(evidence[k], candidate[k], rel_tol=1e-12, abs_tol=1e-12) for k in [AP, SIZE, STD]):
+        raise ValueError('Selected metrics differ from audited trial')
     return {'config': config, 'manifest': manifest, 'baseline': baseline,
-            'baseline_full': read_json(run / 'baseline_full_train.json'), 'selected': selected,
+            'baseline_full': baseline_full, 'selected': selected,
             'context': read_json(run / 'context.json'), 'sensitivity': table(sensitivity_path),
             'tables': tables, 'trials': trials,
             'sources': {str(p.relative_to(root)): digest(p) for p in paths}}
@@ -139,9 +152,9 @@ def build_pages(data):
              ['max_depth', 'Số nguyên 4 đến 24', 'Độ sâu tối đa của cây'],
              ['min_samples_leaf', 'Số nguyên 1 đến 12', 'Số mẫu tối thiểu tại lá'],
              ['max_features', 'Số thực 0,4 đến 1,0', 'Tỷ lệ cột sau tiền xử lý xét tại phép tách']], 'Bảng 1 Miền tìm kiếm được khóa trong configs/final.yaml'),
-         p('AP_CV(x) = [AP₁(x) + AP₂(x) + AP₃(x)] / 3.'),
-         p('S(x) = maxₖ size_bytes(Pipelineₖ(x)) / 1 000 000, với k = 1, 2, 3.'),
-         p('min F(x) = (−AP_CV(x), S(x)), với g(x) = S(x) − 50 ≤ 0 và x thuộc miền đã nêu.'),
+         {'type': 'equation', 'name': 'ap', 'text': 'AP_CV(x) = [AP₁(x) + AP₂(x) + AP₃(x)] / 3'},
+         {'type': 'equation', 'name': 'size', 'text': 'S(x) = maxₖ size_bytes(Pipelineₖ(x)) / 1 000 000; k = 1, 2, 3'},
+         {'type': 'equation', 'name': 'objective', 'text': 'min F(x) = (−AP_CV(x), S(x)); g(x) = S(x) − 50 ≤ 0'},
          p('Average Precision được tính bằng average_precision_score từ xác suất predict_proba trên validation. AP tổng hợp precision theo các mức tăng recall; đây không phải accuracy và không đồng nhất với diện tích PR tính theo quy tắc hình thang [2].'),
          p('S là dung lượng tệp Joblib của toàn bộ fitted preprocessing và RF với compress=3, dùng MB thập phân. Đây không phải dung lượng RAM, kích thước riêng các cây hay thời gian suy luận. Mục tiêu dùng max của ba folds để biểu diễn fold có tệp lớn nhất.'),
          p('Cố định class_weight=None là quyết định thu gọn phạm vi, không chứng minh class_weight không ảnh hưởng. Model random_state, split seed và CV seed đều bằng 42; n_jobs=1. Chỉ seed của sampler thay đổi giữa các search runs.'))
@@ -201,6 +214,8 @@ def build_pages(data):
          p('Chênh lệch best AP theo seed (TPE−Random): ' + '; '.join(f"{r['search_seed']}: {float(r['tpe_minus_random']):+.6f}" for r in paired) + '.'),
          p(f'Trung bình chênh lệch ghép cặp là {statistics.mean(differences):+.6f}, sample std {statistics.stdev(differences):.6f}. Chỉ năm seeds tạo bằng chứng mô tả hạn chế; không suy ra một sampler luôn tốt hơn trên mọi dữ liệu hoặc ngân sách.'),
          p('Các runs chia sẻ dữ liệu, folds và model seed. Vì vậy std giữa runs đo biến động của quá trình search trên cùng bài toán cố định, không đo toàn bộ bất định do lấy mẫu dữ liệu, chia folds hoặc triển khai thực tế. Các cấu hình giống nhau giữa sampler càng làm giảm cơ sở để coi mọi điểm là quan sát độc lập.'))
+    if failed:
+        pages[-1]['blocks'].append(p(f'Có {len(failed)} trials bị lỗi hoặc gián đoạn vận hành. Mặc dù ngân sách attempted bằng nhau, số đánh giá COMPLETE có thể khác giữa các runs. Chênh lệch ghép cặp vì thế cũng chịu ảnh hưởng của gián đoạn, không chỉ của cách đề xuất cấu hình; cần đọc cùng bảng complete/failed.'))
     sensitivity_notes = []
     for name in PARAMS:
         values = [r for r in data['sensitivity'] if r['variable'] == name]
@@ -221,7 +236,7 @@ def build_pages(data):
          p('Các logs cho phép tái tạo bảng và hình từ CSV/JSON, không cần SQLite hoặc model đã bị Git-ignore. Hướng phát triển phù hợp là kiểm chứng trên dữ liệu mới hoặc một thiết kế đánh giá độc lập; không suy diễn kết quả hiện tại thành bảo đảm tối ưu toàn cục hay ưu thế thống kê chắc chắn của TPE.'))
     page('Phụ lục Lệnh chạy và dấu vết tái lập',
          p('Protocol đầy đủ: configs/final.yaml. Frozen data SHA-256: ' + data['context']['hashes']['dataset_sha256'] + '.'),
-         p('Bắt đầu từ Python 3.11 và cài requirements.txt. Tải bank-full.csv bằng scripts/download_data.py, sau đó chạy pytest, compileall, smoke, full và analysis theo thứ tự. Không dùng lại venv được sao chép từ máy khác.'),
+         p('Bắt đầu từ Python 3.11 và cài requirements.txt. Tải bank-full.csv bằng scripts/download_data.py, sau đó chạy pytest, compileall, smoke, full và analysis theo thứ tự. Các lệnh mặc định bên dưới dành cho workspace chính thức có DB; từ clone đã có logs nhưng thiếu DB, dùng namespace reproduction theo README. Không dùng lại venv được sao chép từ máy khác.'),
          {'type': 'code', 'text': '\n'.join([
              'python -m pip install -r requirements.txt', 'python scripts/download_data.py',
              'python -m pytest -q', 'python -m compileall -q src tests scripts',
@@ -253,7 +268,7 @@ def write_markdown(pages, path):
         lines += ['# ' + page['title'], '']
         for block in page['blocks']:
             kind = block['type']
-            if kind == 'paragraph':
+            if kind in ['paragraph', 'equation']:
                 lines += [block['text'], '']
             elif kind == 'heading':
                 lines += ['## ' + block['text'], '']
@@ -278,7 +293,7 @@ def write_docx(pages, root, path):
     from docx.oxml.ns import qn
     document = Document()
     section = document.sections[0]
-    section.page_width, section.page_height = Cm(21), Cm(29.7)
+    section.page_width, section.page_height = Cm(21.59), Cm(27.94)
     section.top_margin, section.bottom_margin = Cm(1.8), Cm(1.8)
     section.left_margin, section.right_margin = Cm(2), Cm(2)
     for name in ['Normal', 'Title', 'Heading 1', 'Heading 2', 'Caption']:
@@ -294,13 +309,48 @@ def write_docx(pages, root, path):
     footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
     footer.add_run('Trang ')
     field = OxmlElement('w:fldSimple'); field.set(qn('w:instr'), 'PAGE'); footer._p.append(field)
+    def math_run(value):
+        run = OxmlElement('m:r')
+        text = OxmlElement('m:t'); text.text = value; run.append(text)
+        return run
+    def subscript(base, sub):
+        node = OxmlElement('m:sSub')
+        for name, value in [('e', base), ('sub', sub)]:
+            part = OxmlElement('m:' + name); part.append(math_run(value)); node.append(part)
+        return node
+    def fraction(numerator, denominator):
+        node = OxmlElement('m:f')
+        for name, children in [('num', numerator), ('den', [math_run(denominator)])]:
+            part = OxmlElement('m:' + name)
+            for child in children:
+                part.append(child)
+            node.append(part)
+        return node
+    def equation(name):
+        math = OxmlElement('m:oMath')
+        if name == 'ap':
+            pieces = [subscript('AP', 'CV'), math_run('(x) = '), fraction([
+                subscript('AP', '1'), math_run('(x) + '), subscript('AP', '2'),
+                math_run('(x) + '), subscript('AP', '3'), math_run('(x)')], '3')]
+        elif name == 'size':
+            pieces = [math_run('S(x) = '), fraction([subscript('max', 'k'),
+                math_run(' size_bytes('), subscript('Pipeline', 'k'), math_run('(x))')],
+                '1 000 000'), math_run(';  k = 1, 2, 3')]
+        else:
+            pieces = [math_run('min F(x) = (−'), subscript('AP', 'CV'),
+                math_run('(x), S(x));  g(x) = S(x) − 50 ≤ 0')]
+        for piece in pieces:
+            math.append(piece)
+        document.add_paragraph()._p.append(math)
     for index, page in enumerate(pages):
         if index:
             document.add_page_break()
         document.add_paragraph(page['title'], 'Title' if index == 0 else 'Heading 1')
         for block in page['blocks']:
             kind = block['type']
-            if kind in ['paragraph', 'heading', 'code']:
+            if kind == 'equation':
+                equation(block['name'])
+            elif kind in ['paragraph', 'heading', 'code']:
                 p = document.add_paragraph(block['text'], 'Heading 2' if kind == 'heading' else 'Normal')
                 if kind == 'code':
                     for run in p.runs:
@@ -320,6 +370,8 @@ def write_docx(pages, root, path):
                           [5.0, 11.6] if len(block['headers']) == 2 else
                           [1.0, 1.6, 2.5, 2.5, 3.0, 2.2, 1.8] if len(block['headers']) == 7 else
                           [16.6 / len(block['headers'])] * len(block['headers']))
+                for column, width in zip(tab.columns, widths):
+                    column.width = Cm(width)
                 for cell, heading in zip(tab.rows[0].cells, block['headers']):
                     cell.text = heading
                 for row in block['rows']:
@@ -334,6 +386,7 @@ def write_docx(pages, root, path):
                 tab._tbl.tblPr.append(borders)
                 repeat = OxmlElement('w:tblHeader'); tab.rows[0]._tr.get_or_add_trPr().append(repeat)
                 for ri, table_row in enumerate(tab.rows):
+                    table_row._tr.get_or_add_trPr().append(OxmlElement('w:cantSplit'))
                     for ci, cell in enumerate(table_row.cells):
                         cell.width = Cm(widths[ci]); cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
                         tcpr = cell._tc.get_or_add_tcPr()
@@ -394,6 +447,10 @@ def main(argv=None):
     readme.write_text(text.split(start)[0] + start + '\n' + '\n'.join(summary_lines) + '\n' + end + text.split(end)[1], encoding='utf-8')
     if args.docx:
         write_docx(pages, ROOT, directory / 'Bao_cao_NMTUH.docx')
+        defense_pages = [{'title': 'Tóm tắt bảo vệ trong 5 đến 7 phút',
+                          'blocks': [{'type': 'paragraph', 'text': paragraph}
+                                     for paragraph in defense.split('\n\n')[1:]]}]
+        write_docx(defense_pages, ROOT, directory / 'Tom_tat_bao_ve.docx')
     print(f'Report sources verified; {len(pages)-2} content pages planned plus 2 appendices. Render QA still required for DOCX.')
 
 

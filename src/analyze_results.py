@@ -204,23 +204,23 @@ def figures(tables, frame, baseline, directory, selected_hash=None):
         ax.plot(x, stats['mean'], label=sampler.upper())
         ax.fill_between(x, stats['mean'] - stats['std'], stats['mean'] + stats['std'], alpha=.18)
     ax.axhline(baseline[AP], color='gray', ls='--', label='Baseline CV')
-    ax.set(xlabel='Attempted trial budget', ylabel='Best feasible CV AP', title='Mean and sample SD across search seeds')
+    ax.set(xlabel='Ngân sách trial attempted', ylabel='AP CV khả thi tốt nhất', title='Trung bình và độ lệch chuẩn giữa search seeds')
     ax.legend(); fig.tight_layout(); fig.savefig(directory / 'convergence.png'); plt.close(fig)
     fig, ax = plt.subplots(figsize=(8, 4.5))
     for sampler, group in eligible(frame).groupby('sampler'):
         ax.scatter(group[SIZE], group[AP], s=13, alpha=.45, label=sampler.upper())
     front = tables['pareto'].sort_values(SIZE)
-    ax.plot(front[SIZE], front[AP], color='black', lw=1, label='Distinct pooled Pareto')
+    ax.plot(front[SIZE], front[AP], color='black', lw=1, label='Pareto gộp loại cấu hình trùng')
     selected = tables['ranked_candidates'].iloc[0] if selected_hash is None else frame.loc[frame.config_hash.eq(selected_hash)].iloc[0]
-    ax.scatter([selected[SIZE]], [selected[AP]], marker='*', s=160, color='red', label='Selected by CV rule')
+    ax.scatter([selected[SIZE]], [selected[AP]], marker='*', s=160, color='red', label='Nghiệm chọn theo CV')
     ax.scatter([baseline[SIZE]], [baseline[AP]], marker='D', color='gray', label='Baseline CV')
-    ax.set(xlabel='Maximum fold pipeline size (decimal MB)', ylabel='Mean 3-fold CV AP')
+    ax.set(xlabel='Dung lượng pipeline lớn nhất qua folds (MB thập phân)', ylabel='AP CV trung bình 3 folds')
     ax.legend(fontsize=8); fig.tight_layout(); fig.savefig(directory / 'pareto.png'); plt.close(fig)
     fig, ax = plt.subplots(figsize=(7, 4))
     paired = tables['paired_differences']
     for _, row in paired.iterrows():
         ax.plot([0, 1], [row['random'], row['tpe']], marker='o', label=f"Seed {int(row.search_seed)}")
-    ax.set_xticks([0, 1], ['Random', 'TPE']); ax.set_ylabel('Best feasible CV AP at full budget')
+    ax.set_xticks([0, 1], ['Random', 'TPE']); ax.set_ylabel('AP CV khả thi tốt nhất tại ngân sách đầy đủ')
     ax.legend(fontsize=8); fig.tight_layout(); fig.savefig(directory / 'seed_distribution.png'); plt.close(fig)
 
 

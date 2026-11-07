@@ -45,7 +45,7 @@ def select_with_refit(ranked, cfg, context, root, refitter=refit):
     raise ValueError('No near-best candidate passes full-train size cap; tolerance is unchanged')
 
 
-def finalize(root, sensitivity_dir, figure_dir):
+def finalize(root, sensitivity_dir, figure_dir, analysis_dir=None):
     cfg, frame, _ = load_audited(root)
     context = load_context(cfg)
     fp = fingerprint(cfg, context['hashes'])
@@ -106,19 +106,24 @@ def finalize(root, sensitivity_dir, figure_dir):
     for (name, group), ax in zip(table.groupby('variable', sort=False), axes.flat):
         ax.errorbar(group.value, group[AP], yerr=group.average_precision_cv_std, marker='o', capsize=3)
         ax.axvline(selected['parameters'][name], color='gray', ls='--')
-        ax.set(xlabel=name, ylabel='CV AP mean and fold SD')
+        ax.set(xlabel=name, ylabel='AP CV trung bình và std giữa folds')
     fig.tight_layout(); fig.savefig(figure_dir / 'sensitivity.png', dpi=170); plt.close(fig)
-    analyze(root, resolve_project_path('results/analysis/final'), figure_dir)
+    analyze(root, analysis_dir or resolve_project_path(f'results/analysis/{root.name}'), figure_dir)
     return selected
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input', default='results/final')
-    parser.add_argument('--sensitivity', default='results/sensitivity')
-    parser.add_argument('--figures', default='figures/final')
+    parser.add_argument('--sensitivity')
+    parser.add_argument('--figures')
+    parser.add_argument('--analysis-output')
     args = parser.parse_args(argv)
-    finalize(resolve_project_path(args.input), resolve_project_path(args.sensitivity), resolve_project_path(args.figures))
+    root = resolve_project_path(args.input)
+    sensitivity = args.sensitivity or ('results/sensitivity' if root.name == 'final' else f'results/sensitivity_{root.name}')
+    figure_dir = args.figures or f'figures/{root.name}'
+    analysis_dir = args.analysis_output or f'results/analysis/{root.name}'
+    finalize(root, resolve_project_path(sensitivity), resolve_project_path(figure_dir), resolve_project_path(analysis_dir))
     return 0
 
 

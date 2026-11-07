@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-11-07T21:46:24.7523869+07:00",
+  "command": ".venv/Scripts/python.exe -m pytest -q --basetemp=.pytest_tmp/final_local",
+  "exit_code": 0,
+  "passed": 62,
+  "warnings": 26,
+  "elapsed_seconds": 16.31,
+  "compileall": "PASS: python -m compileall -q src tests scripts",
+  "historical_sha256": "PASS: 111 unchanged",
+  "note": "Report formatting changes after this test do not modify the training implementation."
+}

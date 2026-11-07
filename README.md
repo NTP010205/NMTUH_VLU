@@ -37,20 +37,24 @@ py -3.11 -m venv .venv
 
 [Hướng dẫn dữ liệu và checksum](data/README.md). Dùng `bank-full.csv`, 45.211 dòng, 17 cột; bỏ `duration`, còn 15 đặc trưng gốc. Frozen split gồm 36.168 train, 9.043 holdout; ba CV folds chỉ trên train. Tiền xử lý fit riêng từng training fold; giữ `unknown`. Holdout từng được đánh giá ở baseline v1, không phải tập chưa từng xem. Search và sensitivity v2 không đọc holdout.
 
-## Kiểm thử và chạy
+## Kiểm thử và chạy lại từ clone
+
+Clone chứa logs chính thức nhưng không chứa DB/checkpoint. Phân tích kết quả đã bàn giao bằng `python -m src.analyze_results` như mục kế tiếp. Để chạy thí nghiệm mới, dùng namespace `reproduction`:
 
 ```powershell
 .venv/Scripts/python.exe -m pytest -q
 .venv/Scripts/python.exe -m compileall -q src tests scripts
-.venv/Scripts/python.exe -m src.run_experiments --mode smoke
-.venv/Scripts/python.exe -m src.run_experiments --mode full
-.venv/Scripts/python.exe -m src.analyze_results
-.venv/Scripts/python.exe -m src.finalize_experiments
+.venv/Scripts/python.exe -m src.run_experiments --mode smoke --output results/reproduction_smoke
+.venv/Scripts/python.exe -m src.run_experiments --mode full --output results/reproduction
+.venv/Scripts/python.exe -m src.analyze_results --input results/reproduction --output results/analysis/reproduction --figures figures/reproduction
+.venv/Scripts/python.exe -m src.finalize_experiments --input results/reproduction
 ```
 
-Smoke dùng 2 trials/sampler ở seed 42, lưu riêng trong `results/smoke_v2`. Chỉ chạy full khi tests và smoke PASS. Full chạy tuần tự; baseline CV cùng môi trường. Baseline RF mặc định (100 cây, depth=None, leaf=1, max_features='sqrt') có thể nằm ngoài search domain.
+Smoke dùng 2 trials/sampler ở seed 42, lưu riêng với full. Trong workspace chính thức, output mặc định là `results/smoke_v2` và `results/final`; các lệnh trên tạo bản chạy lại riêng. Chỉ chạy full khi tests và smoke PASS. Full chạy tuần tự; baseline CV cùng môi trường. Baseline RF mặc định (100 cây, depth=None, leaf=1, max_features='sqrt') có thể nằm ngoài search domain.
 
 `finalize_experiments` khóa lựa chọn, refit selected và baseline, chạy sensitivity cục bộ sau khóa, sinh lại bảng/hình. Mỗi biến tối đa ba giá trị gồm selected và hai lân cận, giữ ba biến còn lại; không sửa nghiệm chính theo sensitivity. Thiếu full thì finalization từ chối chạy.
+
+Với input `results/reproduction`, bước finalize ghi sensitivity vào `results/sensitivity_reproduction`, bảng vào `results/analysis/reproduction` và hình vào `figures/reproduction`. Nó không ghi đè bản chính thức. Có thể chỉ định `--analysis-output`, `--sensitivity`, `--figures` nếu cần namespace khác.
 
 ## Phân tích từ clone không có DB
 
@@ -79,3 +83,19 @@ Runner từ chối resume nếu config, data, split, folds, implementation hoặ
 [Chỉ mục v1](docs/archive/README.md), [prompt yêu cầu](PROMPT_CODEX_HOAN_THIEN.md), [log kiểm thử](docs/review/pytest_v2.log). Kết quả v1 và báo cáo rà soát giữ nhãn lịch sử. Audit v1 cần DB từ gói gốc; không chạy được từ clone-only.
 
 Codex hỗ trợ triển khai và kiểm chứng. Không giả kết quả hoặc commit lùi ngày. Năm seeds cung cấp bằng chứng mô tả hạn chế, không chứng minh TPE luôn thắng hoặc nghiệm tối ưu toàn cục.
+
+## Sinh báo cáo và kiểm tra trang
+
+Sau khi full, refit và sensitivity hoàn tất, `scripts/build_final_report.py` sinh nội dung tiếng Việt, bản tóm tắt bảo vệ và bảng README từ các nguồn đã kiểm tra hash. Script từ chối nguồn thiếu hoặc sai protocol.
+
+Dùng môi trường tài liệu riêng để không đổi fingerprint môi trường huấn luyện:
+
+```powershell
+py -3.11 -m venv ../.document_env
+../.document_env/Scripts/python.exe -m pip install -r requirements-report.txt
+../.document_env/Scripts/python.exe scripts/build_final_report.py --docx
+pwsh -NoProfile -File scripts/render_word.ps1
+../.document_env/Scripts/python.exe scripts/render_pdf_pages.py report/qa/final/Bao_cao_NMTUH.pdf
+```
+
+`render_word.ps1` dùng Microsoft Word đã cài trên Windows, mở DOCX read-only trong instance ẩn, xuất PDF rồi đóng instance đó. Phải xem từng ảnh `report/qa/final/page-N.png` và sửa lỗi dàn trang trước khi nghiệm thu. PDF/PNG là sản phẩm QA, bị Git-ignore. Có thể theo dõi thí nghiệm bằng `.venv/Scripts/python.exe scripts/show_progress.py`; không khởi động runner thứ hai vào cùng output.
