@@ -139,3 +139,5 @@ pwsh -NoProfile -File scripts/render_word.ps1
 ## Nghiệm thu và bàn giao
 
 [Hồ sơ nghiệm thu](docs/review/NGHIEM_THU.md) ghi phạm vi kiểm tra thực tế, kết quả clone, các trial gián đoạn và giới hạn còn lại. [Danh sách file thay đổi](docs/review/CHANGED_FILES.md).
+
+Đã đăng bản nghiệm thu trên nhánh `main` và `complete/4hp-v2` của repository public. [Xác nhận GitHub](docs/review/github_publication.json).

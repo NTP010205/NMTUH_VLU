@@ -36,3 +36,7 @@ Sensitivity: 8 cấu hình phân biệt, 24 folds đã đối chiếu aggregates
 ## Giới hạn còn lại
 
 Không có đánh giá holdout v2 hoặc external test; holdout từng được baseline v1 xem. Năm search seeds chỉ cho bằng chứng mô tả và có hai trial gián đoạn. Cap 50 MB không binding trên các trials hoàn thành. Lịch sử năm tuần không thể được tạo lại bằng commits lùi ngày. Sinh viên cần đọc báo cáo, hiểu các quyết định và nộp link trên LMS; những thao tác cá nhân đó chưa được thực hiện thay sinh viên. Trạng thái push phải kiểm tra bằng remote GitHub, không suy ra từ việc có commit cục bộ.
+
+## GitHub đã xác nhận
+
+Đã push main và complete/4hp-v2 lên repository public, mặc định main. GitHub xác nhận commit khoa học e655158cb9172368e02b628b822467e551442d17 và báo cáo Word; mô tả About cùng sáu topics đã cập nhật. [Bằng chứng xác nhận](github_publication.json). Các commits sau đó chỉ bổ sung hồ sơ đăng.

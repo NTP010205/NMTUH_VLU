@@ -1,0 +1,12 @@
+{
+  "description": "Tối ưu 4 siêu tham số Random Forest trên UCI Bank Marketing: AP và model size, 5 search seeds, 400 attempted trials, kết quả tái lập.",
+  "topics": [
+    "machine-learning",
+    "multi-objective-optimization",
+    "optimization",
+    "optuna",
+    "random-forest",
+    "reproducible-research"
+  ],
+  "status": "VERIFIED"
+}

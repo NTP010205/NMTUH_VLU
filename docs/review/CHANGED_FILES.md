@@ -18,6 +18,7 @@ Các thay đổi chính: configs/final.yaml; src/run_experiments.py; src/analyze
 | A | `docs/archive/README.md` |
 | A | `docs/archive/README_v1.md` |
 | A | `docs/archive/requirements_v1.txt` |
+| A | `docs/review/CHANGED_FILES.md` |
 | A | `docs/review/DOI_CHIEU_DE_BAI.md` |
 | A | `docs/review/GIT_PROVENANCE.md` |
 | A | `docs/review/NGHIEM_THU.md` |
@@ -44,6 +45,8 @@ Các thay đổi chính: configs/final.yaml; src/run_experiments.py; src/analyze
 | A | `docs/review/full_resume_20261107_213305.stderr.log` |
 | A | `docs/review/full_v2.log` |
 | A | `docs/review/github_metadata_20261107.json` |
+| A | `docs/review/github_portfolio_metadata.json` |
+| A | `docs/review/github_publication.json` |
 | A | `docs/review/hardware.json` |
 | A | `docs/review/original_git_remotes_20261107.txt` |
 | A | `docs/review/original_git_status_20261107.txt` |
@@ -285,4 +288,3 @@ Các thay đổi chính: configs/final.yaml; src/run_experiments.py; src/analyze
 | A | `tests/test_final_v2.py` |
 | M | `tests/test_optimize_ap_model_size.py` |
 | M | `tests/test_week4_analysis.py` |
-| A | `docs/review/CHANGED_FILES.md` |

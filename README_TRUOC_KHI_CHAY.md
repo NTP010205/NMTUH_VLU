@@ -1,6 +1,6 @@
 # Bắt đầu từ đây
 
-**Cập nhật triển khai ngày 07/11/2026:** dự án đã có runner, config, analysis và tests cho protocol 4 biến v2. Đọc [README.md](README.md) để xem trạng thái thực nghiệm và đường chạy hiện tại. Nội dung bên dưới mô tả gói bàn giao ban đầu ngày 03/11/2026; không dùng các câu “chưa triển khai” bên dưới như trạng thái hiện tại. V1 vẫn được giữ nguyên bytes và kiểm tra bằng SHA-256. Repository đích: https://github.com/NTP010205/NMTUH_VLU.
+**Hoàn thiện ngày 08/11/2026:** v2 đã đủ 400 attempted trials (398 COMPLETE, 2 FAIL), hoàn tất refit, sensitivity, báo cáo Word và kiểm tra clone. Đã push lên repository public https://github.com/NTP010205/NMTUH_VLU. Đọc [README hiện tại](README.md), [báo cáo Word](report/Bao_cao_NMTUH.docx) và [hồ sơ nghiệm thu](docs/review/NGHIEM_THU.md). Nội dung bên dưới là snapshot gói ban đầu ngày 03/11/2026; các câu “chưa triển khai/chưa push” chỉ mô tả lịch sử. Bằng chứng v1 vẫn giữ nguyên SHA-256.
 
 Đây là bản đóng gói gọn từ ZIP được cung cấp, rà soát ngày 03/11/2026. Mã và log gốc được giữ nguyên bytes; chưa triển khai protocol 4 biến hoặc chạy thêm seeds. Repo đích: https://github.com/NTP010205/NMTUH_VLU.
 
@@ -9,7 +9,7 @@
 3. Prompt yêu cầu chỉnh 4 biến, chạy nhiều seeds, phân tích và tạo báo cáo Word cuối từ kết quả thật.
 4. Chỉ đăng bản hoàn thiện sau khi kiểm tra đường chạy từ clone sạch. Gói này chưa được push lên GitHub.
 
-## Tình trạng hiện tại
+## Tình trạng gói ngày 03/11/2026
 
 - V1: 5 siêu tham số, 1 seed, 40 Random + 40 TPE trials. Log kiểm tra nhất quán; xem `docs/review/audit_existing.json`.
 - V2 đề xuất: 4 biến gồm n_estimators, max_depth, min_samples_leaf, max_features; cố định class_weight=None; 5 search seeds × 2 sampler × 40 trials.

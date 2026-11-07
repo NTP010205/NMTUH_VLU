@@ -9,3 +9,5 @@ Một clone riêng tên `NMTUH_VLU_git` được tạo từ lịch sử gốc, n
 `original_git_status_20261107.txt` và `original_git_remotes_20261107.txt` ghi trạng thái checkout gốc tại lần tiếp tục ngày 07/11/2026. Các commits mới phản ánh công việc thực, không đại diện cho năm tuần phát triển.
 
 Kiểm tra `git ls-remote --exit-code` ngày 07/11/2026 truy cập được repo đích nhưng không thấy refs (exit 2). Điều này không phải bằng chứng đã push hoặc repo là public. Chỉ cập nhật trạng thái đăng sau khi có xác nhận từ GitHub.
+
+Ngày 08/11/2026, push thường (không force) đã tạo main và complete/4hp-v2. GitHub REST xác nhận repository public, default branch main và commit khoa học e655158cb9172368e02b628b822467e551442d17; báo cáo Word có trên remote. Xem github_publication.json và github_portfolio_metadata.json. Các commits ghi nhận xác nhận này chỉ bổ sung hồ sơ bàn giao.
