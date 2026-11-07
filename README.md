@@ -39,7 +39,7 @@ Nguồn: [run_summary.csv](results/analysis/final/run_summary.csv), [sampler_sum
 
 ![Pareto và nghiệm chọn](figures/final/pareto.png)
 
-Báo cáo nội dung: [Bao_cao_NMTUH.md](report/Bao_cao_NMTUH.md). Tóm tắt bảo vệ: [Tom_tat_bao_ve.md](report/Tom_tat_bao_ve.md). File Word chỉ được nghiệm thu sau khi render và kiểm tra từng trang.
+Tài liệu: [Báo cáo Word](report/Bao_cao_NMTUH.docx), [Tóm tắt bảo vệ một trang](report/Tom_tat_bao_ve.docx). [Nội dung Markdown](report/Bao_cao_NMTUH.md), [hồ sơ kiểm tra trang và SHA-256](docs/review/document_qa.json).
 <!-- FINAL_RESULTS_END -->
 
 ## Phương pháp và giới hạn

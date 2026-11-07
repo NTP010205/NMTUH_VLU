@@ -1,0 +1,57 @@
+{
+  "checked_utc": "2026-11-07T23:08:29.672865+00:00",
+  "renderer": "Microsoft Word native PDF export; PyMuPDF rasterization at 150 dpi",
+  "canonical_renderer": "Unavailable: soffice.exe missing; see document_renderer_probe.log",
+  "content_pages": 10,
+  "appendix_pages": 2,
+  "documents": [
+    {
+      "file": "report/Bao_cao_NMTUH.docx",
+      "sha256": "1a27ebdc812414653aa7de22f5b1b7fdfa5d2c80c4df9452045467b140b5d848",
+      "pdf_sha256": "281c7e0390c13160b6f054df1e598a713f89d04a8ed6956a33296b188024e7bd",
+      "pages": 12,
+      "pages_visually_inspected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "page_png_sha256": {
+        "page-1.png": "4d57b221f7534232b040242f20f7a9dfa038afad95bb3657e9216899cfa7a100",
+        "page-2.png": "de6f1a921009ddf644a8aa261e51c21dfa98db89784d72dbce1c81a458c27024",
+        "page-3.png": "e52c44b2b6469adce672ce5dc79bb2aa094125dcb5b581e609980ada408d685b",
+        "page-4.png": "e23f4cc8bcec50f008750b184d7adaa83e7194e51f4065ccab3f2a7e44705b7b",
+        "page-5.png": "5a33c457fc82516228c55d59026efcfcfe4ddabdc394ed74e600da9feb0e8534",
+        "page-6.png": "27f18f5784caf265f2fd66e56fab16df6c5f6af2499d4b4bbcef83f16c51fb7b",
+        "page-7.png": "0482d5c587fe3a200c088596c528ab4521783fda5b69d8b44bdab73f53db4450",
+        "page-8.png": "97b5a15da4f9ae4d44e013328585198b0353ddcd2688fc4371196c87a2856003",
+        "page-9.png": "5595dff3354bb4ce9a58b69ff2c30acfd438deb39088636f2a70fbb32ac24208",
+        "page-10.png": "6d57b81a37ce74083a13e67759241bb69e51375ae5e2196600feefd75992490f",
+        "page-11.png": "f4ae2927fc128b162f5221b2ad94a4b14028f44da1eab0990e328136a795ba6d",
+        "page-12.png": "7148d9ffe5a0635d96dd7f91f5997b5ff50ce0571c450d9edc04bce758c1f1bd"
+      },
+      "result": "PASS: no clipped content, broken table, missing glyph or overlapping figure observed"
+    },
+    {
+      "file": "report/Tom_tat_bao_ve.docx",
+      "sha256": "e7b941aabc699d23abcb3474b4b26bf946cc6749eb1edec7ea8e27a5480fd5fc",
+      "pdf_sha256": "cb4d724c1c711a2b1a4db7fd5e22382b26a20f491d3983c84d0bd38cca80aa19",
+      "pages": 1,
+      "pages_visually_inspected": [
+        1
+      ],
+      "page_png_sha256": {
+        "page-1.png": "04007b01868ade50a9e64705ae5cb23cdd8e87ef874f14a27471c003b4f36c0e"
+      },
+      "result": "PASS: no clipped content, broken table, missing glyph or overlapping figure observed"
+    }
+  ]
+}

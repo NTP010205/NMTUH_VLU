@@ -1,5 +1,11 @@
 {
   "runner_pid": 31620,
   "tag": "20261107_213305",
-  "finalizer_pid": 28316
+  "finalizer_pid": 28316,
+  "status": "completed",
+  "observed_utc": "2026-11-07T23:11:15.936037+00:00",
+  "attempted": 400,
+  "complete": 398,
+  "failed": 2,
+  "note": "Runner and refit/sensitivity finished; identifiers retained as provenance only."
 }

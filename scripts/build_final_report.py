@@ -73,7 +73,7 @@ def audited_sources(root):
         raise ValueError('Baseline hash mismatch')
     selected = read_json(run / 'selected_candidate.json')
     for name, sha in selected['source_manifests'].items():
-        if digest(run / name) != sha:
+        if digest(run / name.replace('\\', '/')) != sha:
             raise ValueError('Selection source manifest mismatch')
     if selected['fingerprint'] != baseline['fingerprint'] or not selected['full_train']['feasible']:
         raise ValueError('Selected full-train audit invalid')
@@ -204,17 +204,17 @@ def build_pages(data):
     page('5 Pareto và nghiệm cuối',
          f('pareto.png', 'Hình 2 AP và dung lượng max-fold của các trial khả thi, Pareto gộp và nghiệm cuối theo quy tắc đã khóa.'),
          t(['Siêu tham số', 'Giá trị được chọn'], [[pname, str(params[pname])] for pname in PARAMS], 'Bảng 5 Bốn giá trị của nghiệm cuối'),
-         p(f"Nguồn nghiệm: sampler {row['sampler']}, search seed {row['search_seed']}, trial {row['trial']} (đánh số từ 0). Config hash: {row['config_hash']}. CV AP={fmt(row[AP])} ± {fmt(row[STD])}; S={fmt(row[SIZE])} MB."),
+         p(f"Nguồn nghiệm theo tie-break: sampler {row['sampler']}, search seed {row['search_seed']}, trial {row['trial']} (đánh số từ 0). Config hash: {row['config_hash']}. CV AP={fmt(row[AP])} ± {fmt(row[STD])}; S={fmt(row[SIZE])} MB. Các logs trùng cấu hình: " + '; '.join(f"{r['sampler']}/seed {r['search_seed']}/trial {r['trial']}" for r in data['trials'] if r['config_hash'] == row['config_hash']) + '.'),
          p(f'AP tốt nhất trong tập gộp là {fmt(best)}; nghiệm chọn mất {best-row[AP]:.6f} điểm AP tuyệt đối, trong tolerance 0,005. Tập Pareto có {len(data["tables"]["pareto"])} cấu hình phân biệt. Lý do chọn là dung lượng nhỏ nhất trong vùng chất lượng near-best, không phải AP cao nhất hoặc một nghiệm tối ưu toàn cục.'),
          p(f'Refit full train của nghiệm chọn đạt {fmt(selected["full_train"]["full_train_size_mb"], 3)} MB, baseline full train {fmt(data["baseline_full"]["full_train_size_mb"], 3)} MB, giảm {full_reduction:.2f}%. Đây là so sánh full-train với full-train. Mức lớn nhất trong các trial CV khả thi là {max_size:.3f} MB; ' + ('ngưỡng 50 MB không binding trong các trial hoàn thành.' if all(r['feasible'] for r in data['trials'] if r['status'] == 'COMPLETE') else 'có trial hoàn thành vi phạm ngưỡng 50 MB và đã bị loại khỏi chọn nghiệm.')))
     page('5 Độ ổn định giữa các seeds',
          f('seed_distribution.png', 'Hình 3 Best AP của Random và TPE ghép cặp theo cùng seed. Mỗi đoạn nối là một cặp search runs.'),
-         t(['Sampler', 'Best AP mean ± std', 'AP chọn mean ± std', 'Size chọn mean ± std'], [
+         t(['Sampler', 'Best AP mean ± std', 'AP chọn mean ± std', 'Size chọn mean ± std (MB)'], [
              [r['sampler'], f"{fmt(r['best_ap_mean'])} ± {fmt(r['best_ap_std'])}",
               f"{fmt(r['selected_ap_mean'])} ± {fmt(r['selected_ap_std'])}",
               f"{fmt(r['selected_size_mean'],3)} ± {fmt(r['selected_size_std'],3)}"] for r in sampler],
            'Bảng 6 Mean và sample std giữa năm search runs, không phải giữa folds'),
-         p('Chênh lệch best AP theo seed (TPE−Random): ' + '; '.join(f"{r['search_seed']}: {float(r['tpe_minus_random']):+.6f}" for r in paired) + '.'),
+         p('Chênh lệch best AP theo seed (TPE−Random): ' + '; '.join(f"{r['search_seed']}:\u00a0{float(r['tpe_minus_random']):+.6f}".replace('-', '−') for r in paired) + '.'),
          p(f'Trung bình chênh lệch ghép cặp là {statistics.mean(differences):+.6f}, sample std {statistics.stdev(differences):.6f}. Chỉ năm seeds tạo bằng chứng mô tả hạn chế; không suy ra một sampler luôn tốt hơn trên mọi dữ liệu hoặc ngân sách.'),
          p('Các runs chia sẻ dữ liệu, folds và model seed. Vì vậy std giữa runs đo biến động của quá trình search trên cùng bài toán cố định, không đo toàn bộ bất định do lấy mẫu dữ liệu, chia folds hoặc triển khai thực tế. Các cấu hình giống nhau giữa sampler càng làm giảm cơ sở để coi mọi điểm là quan sát độc lập.'))
     if failed:
@@ -245,7 +245,8 @@ def build_pages(data):
              'python -m pytest -q', 'python -m compileall -q src tests scripts',
              'python -m src.run_experiments --mode smoke', 'python -m src.run_experiments --mode full',
              'python -m src.analyze_results', 'python -m src.finalize_experiments',
-             'python scripts/build_final_report.py --docx'])},
+             '# Môi trường tài liệu riêng: xem README',
+             '../.document_env/Scripts/python.exe scripts/build_final_report.py --docx'])},
          p('Resume giữ nguyên protocol, fingerprint và ngân sách attempted. Nếu clone chỉ có logs mà không có DB/checkpoint, phân tích trực tiếp bằng src.analyze_results; muốn huấn luyện lại, dùng --output results/reproduction. Không xóa DB để biến kiểm tra bị thiếu thành PASS.'),
          t(['Seed', 'Sampler', 'Tổng trial giây', 'Wall time giây'], [
              [r['search_seed'], r['sampler'], fmt(r['total_trial_seconds'],1), fmt(r['wall_seconds'],1)] for r in runs],
@@ -306,6 +307,8 @@ def write_docx(pages, root, path):
         style.font.size = Pt({'Normal': 11, 'Title': 21, 'Heading 1': 16, 'Heading 2': 13, 'Caption': 9}[name])
         style.paragraph_format.space_after = Pt(7)
         style.paragraph_format.line_spacing = 1.08
+        for border in style.element.xpath('.//w:pBdr'):
+            border.getparent().remove(border)
     document.core_properties.author = 'Nguyễn Thành Phát'
     document.core_properties.title = pages[0]['title']
     footer = section.footer.paragraphs[0]
@@ -314,7 +317,7 @@ def write_docx(pages, root, path):
     field = OxmlElement('w:fldSimple'); field.set(qn('w:instr'), 'PAGE'); footer._p.append(field)
     def math_run(value):
         run = OxmlElement('m:r')
-        text = OxmlElement('m:t'); text.text = value; run.append(text)
+        text = OxmlElement('m:t'); text.set(qn('xml:space'), 'preserve'); text.text = value; run.append(text)
         return run
     def subscript(base, sub):
         node = OxmlElement('m:sSub')
@@ -337,7 +340,7 @@ def write_docx(pages, root, path):
                 math_run('(x) + '), subscript('AP', '3'), math_run('(x)')], '3')]
         elif name == 'size':
             pieces = [math_run('S(x) = '), fraction([subscript('max', 'k'),
-                math_run(' size_bytes('), subscript('Pipeline', 'k'), math_run('(x))')],
+                math_run('\u2009size_bytes('), subscript('Pipeline', 'k'), math_run('(x))')],
                 '1 000 000'), math_run(';  k = 1, 2, 3')]
         else:
             pieces = [math_run('min F(x) = (−'), subscript('AP', 'CV'),
@@ -369,7 +372,7 @@ def write_docx(pages, root, path):
                 tab = document.add_table(rows=1, cols=len(block['headers']))
                 tab.alignment = WD_TABLE_ALIGNMENT.CENTER
                 tab.autofit = False
-                widths = ([2.6, 3.8, 10.2] if len(block['headers']) == 3 else
+                widths = ([3.8, 4.2, 8.6] if len(block['headers']) == 3 else
                           [5.0, 11.6] if len(block['headers']) == 2 else
                           [1.0, 1.6, 2.5, 2.5, 3.0, 2.2, 1.8] if len(block['headers']) == 7 else
                           [16.6 / len(block['headers'])] * len(block['headers']))
@@ -400,6 +403,8 @@ def write_docx(pages, root, path):
                         tcpr.append(margins)
                         for p in cell.paragraphs:
                             p.paragraph_format.space_after = Pt(2)
+                            if len(widths) >= 4:
+                                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                             for run in p.runs:
                                 run.font.size = Pt(9 if len(widths) > 3 else 10)
                                 run.bold = ri == 0
@@ -441,7 +446,7 @@ def main(argv=None):
                       '', f"Selected CV AP {fmt(s['candidate'][AP])}, max-fold size {fmt(s['candidate'][SIZE],3)} MB; full-train size {fmt(s['full_train']['full_train_size_mb'],3)} MB.",
                       '', 'Nguồn: [run_summary.csv](results/analysis/final/run_summary.csv), [sampler_summary.csv](results/analysis/final/sampler_summary.csv), [selected_candidate.json](results/final/selected_candidate.json).',
                       '', '![Best-so-far AP giữa seeds](figures/final/convergence.png)', '', '![Pareto và nghiệm chọn](figures/final/pareto.png)',
-                      '', 'Báo cáo nội dung: [Bao_cao_NMTUH.md](report/Bao_cao_NMTUH.md). Tóm tắt bảo vệ: [Tom_tat_bao_ve.md](report/Tom_tat_bao_ve.md). File Word chỉ được nghiệm thu sau khi render và kiểm tra từng trang.']
+                      '', 'Tài liệu: [Báo cáo Word](report/Bao_cao_NMTUH.docx), [Tóm tắt bảo vệ một trang](report/Tom_tat_bao_ve.docx). [Nội dung Markdown](report/Bao_cao_NMTUH.md), [hồ sơ kiểm tra trang và SHA-256](docs/review/document_qa.json).']
     readme = ROOT / 'README.md'
     text = readme.read_text(encoding='utf-8')
     start, end = '<!-- FINAL_RESULTS_START -->', '<!-- FINAL_RESULTS_END -->'
