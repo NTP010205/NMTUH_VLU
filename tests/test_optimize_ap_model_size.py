@@ -5,6 +5,8 @@ import copy
 import numpy as np
 import optuna
 import pandas as pd
+import pytest
+from src.paths import PROJECT_ROOT
 
 from src.optimize_ap_model_size import (
     audit_historical_config_hashes,
@@ -211,6 +213,13 @@ def test_full_mode_requires_explicit_confirmation(capsys):
     assert "requires --confirm-full" in capsys.readouterr().out
 
 
+@pytest.mark.skipif(
+    not all((PROJECT_ROOT / path).is_file() for path in [
+        'results/hpo/pilot/random_seed42.db',
+        'results/hpo/ap_model_size_v1/smoke/random_seed42_ap_model_size_v1.db',
+    ]),
+    reason='Historical SQLite hash audit not checked: pilot/smoke DBs are not tracked by Git',
+)
 def test_historical_hash_difference_is_only_csv_float_rounding():
     audit = audit_historical_config_hashes(load_yaml_mapping("configs/hpo_ap_model_size_v1.yaml"))
     assert audit["raw_sqlite_parameters_equal"] is True

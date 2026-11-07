@@ -88,6 +88,10 @@ def load_audited(root, allow_partial=False):
                 raise ValueError('Full budget not complete')
             if sorted(frame.trial) != list(range(len(frame))) or not frame.status.isin(['COMPLETE', 'FAIL']).all():
                 raise ValueError('Trial sequence is incomplete')
+            if manifest['complete'] != int(frame.status.eq('COMPLETE').sum()) or manifest['failed'] != int(frame.status.eq('FAIL').sum()):
+                raise ValueError('Manifest state counts mismatch')
+            if not set(folds.trial).issubset(set(frame.trial)):
+                raise ValueError('Fold references an unknown trial')
             expected_id = f"{config['protocol']}_full_seed{seed}_{sampler}"
             for row in rows:
                 if row['run_id'] != expected_id or row['search_seed'] != seed or row['sampler'] != sampler:
@@ -106,8 +110,14 @@ def load_audited(root, allow_partial=False):
                 for key, value in manifest['hashes'].items():
                     if row[key] != value:
                         raise ValueError('Input hash mismatch')
+                subset = folds.loc[folds.trial.eq(row['trial'])]
+                for key, value in {'run_id': expected_id, 'search_seed': seed, 'sampler': sampler,
+                                   'config_hash': row['config_hash']}.items():
+                    if not subset[key].eq(value).all():
+                        raise ValueError('Fold run/config identity mismatch')
+                if subset['fold'].duplicated().any() or not subset['fold'].between(1, config['split']['cv_folds']).all():
+                    raise ValueError('Invalid partial fold sequence')
                 if row['status'] == 'COMPLETE':
-                    subset = folds.loc[folds.trial.eq(row['trial'])]
                     validate_aggregate(row, subset, config['split']['cv_folds'])
                     if not np.isclose(row['g'], row[SIZE] - config['size_cap_mb'], atol=1e-12):
                         raise ValueError('Constraint mismatch')
@@ -119,6 +129,8 @@ def load_audited(root, allow_partial=False):
             db = directory / 'study.db'
             if db.exists():
                 with closing(sqlite3.connect(db.as_uri() + '?mode=ro', uri=True)) as connection:
+                    if connection.execute('SELECT study_name FROM studies').fetchall() != [(expected_id,)]:
+                        raise ValueError('SQLite study identity mismatch')
                     stored = connection.execute('SELECT number, state FROM trials ORDER BY number').fetchall()
                     if stored != [(r['trial'], r['status']) for r in rows]:
                         raise ValueError('SQLite state mismatch')
@@ -129,6 +141,8 @@ def load_audited(root, allow_partial=False):
                 sqlite_status = 'PASS (trial states and objectives)'
             audit.append({'search_seed': seed, 'sampler': sampler, 'csv_json_folds': 'PASS',
                           'sqlite': sqlite_status, 'manifest_sha256': sha256_file(directory / 'manifest.json'),
+                          'recorded_fold_fits': len(folds),
+                          'fold_fits_from_complete_trials': int(frame.status.eq('COMPLETE').sum()) * config['split']['cv_folds'],
                           'wall_seconds': sum(s['wall_seconds'] for s in manifest['sessions'])})
             all_rows.extend(rows)
     if len(fingerprints) != 1:
@@ -222,6 +236,8 @@ def analyze(root, output, figure_dir, allow_partial=False):
     atomic_json({'status': 'PARTIAL' if allow_partial else 'COMPLETE', 'source_root': str(root),
                  'protocol': config['protocol'], 'runs': audit, 'attempted': len(frame),
                  'complete': int(frame.status.eq('COMPLETE').sum()), 'failed': int(frame.status.eq('FAIL').sum()),
+                 'recorded_fold_fits': sum(a['recorded_fold_fits'] for a in audit),
+                 'fold_fits_from_complete_trials': sum(a['fold_fits_from_complete_trials'] for a in audit),
                  'baseline_sha256': sha256_file(root / 'baseline.json'),
                  'tables': {p.name: sha256_file(p) for p in output.glob('*.csv')},
                  'figures': {p.name: sha256_file(p) for p in figure_dir.glob('*.png')}}, output / 'analysis_manifest.json')
